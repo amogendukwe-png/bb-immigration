@@ -1,0 +1,6 @@
+{
+  "name": "Barbados Digital Form Service",
+  "description": "Alpha service for digital government forms for the Government of Barbados, supporting passport applications, citizenship registration, and skilled national stay applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
