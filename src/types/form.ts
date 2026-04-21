@@ -27,14 +27,24 @@ export type FormStep =
   | 'CHECK_YOUR_ANSWERS'
   | 'PAYMENT'
   | 'CONFIRMATION'
-  | 'EXIT_INELIGIBLE';
+  | 'EXIT_INELIGIBLE'
+  // Form B — Stay Extension
+  | 'STAY_EXTENSION_DETAILS'
+  // Form H-3 — School report on non-immigrant student
+  | 'H3_SCHOOL_DETAILS'
+  | 'H3_STUDENT_DETAILS'
+  | 'H3_REPORT_TYPE'
+  | 'H3_DEPARTURE_DETAILS'
+  | 'H3_REMARKS';
 
 export type JourneyType =
   | 'PASSPORT'
   | 'WORK_PERMIT'
   | 'CITIZENSHIP'
   | 'STUDY'
-  | 'RESIDENCY';
+  | 'RESIDENCY'
+  | 'STAY_EXTENSION'
+  | 'SCHOOL_REPORT';
 
 export interface FormState {
   currentStep: FormStep;
@@ -164,6 +174,41 @@ export interface FormState {
     referenceNumber?: string;
     courseStart?: string;
     courseEnd?: string;
+  };
+
+  // Form B — Stay Extension
+  stayExtension?: {
+    dateOfEntry?: string;
+    currentPermitPeriod?: string;
+    extensionRequested?: string;
+    previousExtensions?: { date: string; lengthSought: string; granted: string }[];
+    reasons?: string;
+  };
+
+  // Form H-3 — School Report on Non-Immigrant Student
+  h3School?: {
+    schoolName?: string;
+    schoolOfficial?: string;
+    schoolAddress?: string;
+  };
+  h3Student?: {
+    familyName?: string;
+    firstName?: string;
+    middleName?: string;
+    dateOfBirth?: string;
+    countryOfBirth?: string;
+    countryOfNationality?: string;
+  };
+  h3Report?: {
+    reportType?: 'A' | 'B' | 'C' | 'D';
+    terminationDate?: string;
+    lastAddressInBarbados?: string;
+    hasDeparted?: boolean;
+    dateOfDeparture?: string;
+    portOfDeparture?: string;
+    transportName?: string;
+    addressAbroad?: string;
+    remarks?: string;
   };
 
   errors: Record<string, string>;

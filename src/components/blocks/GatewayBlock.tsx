@@ -33,6 +33,16 @@ const pathways = [
     title: 'Study in Barbados',
     desc: 'Student eligibility certificates and non-immigrant student status (Form H1).',
   },
+  {
+    id: 'STAY_EXTENSION',
+    title: 'Extend your stay in Barbados',
+    desc: 'Apply to vary or extend the period of your current permitted stay (Form B).',
+  },
+  {
+    id: 'SCHOOL_REPORT',
+    title: 'Submit a student status report',
+    desc: 'For school officials — report a change in a non-immigrant student\'s attendance or departure (Form H-3).',
+  },
 ];
 
 export const GatewayBlock: React.FC = () => {
@@ -66,9 +76,7 @@ export const GatewayBlock: React.FC = () => {
                 {pathway.desc}
               </p>
             </div>
-            {i < pathways.length - 1 && (
-              <hr style={{ border: 'none', borderTop: '1px solid var(--color-grey-00)', margin: 0 }} />
-            )}
+            <hr style={{ border: 'none', borderTop: '1px solid var(--color-grey-00)', margin: 0 }} />
           </div>
         ))}
       </div>

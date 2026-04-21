@@ -28,9 +28,12 @@ export const getNextStep = (state: FormState): FormStep => {
 
     // ── Universal start ────────────────────────────────────────────
     case 'GATEWAY':
+      // School Report bypasses START_PAGE and goes straight to school details
+      if (j === 'SCHOOL_REPORT') return 'H3_SCHOOL_DETAILS';
       return 'START_PAGE';
 
     case 'START_PAGE':
+      if (j === 'STAY_EXTENSION') return 'PERSONAL_DETAILS';
       return 'ELIGIBILITY';
 
     // ── Eligibility ────────────────────────────────────────────────
@@ -71,8 +74,13 @@ export const getNextStep = (state: FormState): FormStep => {
     case 'PASSPORT_DETAILS':
       if (j === 'PASSPORT') return 'NEXT_OF_KIN';
       if (j === 'WORK_PERMIT') return 'SKILL_CATEGORY';
+      if (j === 'STAY_EXTENSION') return 'STAY_EXTENSION_DETAILS';
       // CITIZENSHIP, RESIDENCY → address block (no skill category)
       return 'ADDRESS_BLOCK';
+
+    // ── Form B: Stay Extension Details ───────────────────────────
+    case 'STAY_EXTENSION_DETAILS':
+      return 'EVIDENCE_UPLOAD';
 
     // ── Passport: Next of Kin ─────────────────────────────────────
     case 'NEXT_OF_KIN':
@@ -124,11 +132,33 @@ export const getNextStep = (state: FormState): FormStep => {
     case 'EXCLUDED_CLASSES':
       return 'EVIDENCE_UPLOAD';
 
+    // ── Form H-3: School Report ───────────────────────────────────
+    case 'H3_SCHOOL_DETAILS':
+      return 'H3_STUDENT_DETAILS';
+
+    case 'H3_STUDENT_DETAILS':
+      return 'H3_REPORT_TYPE';
+
+    case 'H3_REPORT_TYPE': {
+      const type = state.h3Report?.reportType;
+      // If student has departed (C or D), collect departure details
+      if (type === 'C' || type === 'D') return 'H3_DEPARTURE_DETAILS';
+      return 'H3_REMARKS';
+    }
+
+    case 'H3_DEPARTURE_DETAILS':
+      return 'H3_REMARKS';
+
+    case 'H3_REMARKS':
+      return 'CHECK_YOUR_ANSWERS';
+
     // ── Shared end of journey ─────────────────────────────────────
     case 'EVIDENCE_UPLOAD':
       return 'CHECK_YOUR_ANSWERS';
 
     case 'CHECK_YOUR_ANSWERS':
+      // School Report doesn't require payment
+      if (j === 'SCHOOL_REPORT') return 'CONFIRMATION';
       return 'PAYMENT';
 
     case 'PAYMENT':
@@ -150,6 +180,19 @@ export const getPreviousStep = (state: FormState): FormStep => {
     case 'START_PAGE':       return 'GATEWAY';
     case 'ELIGIBILITY':      return 'START_PAGE';
 
+    // Form H-3
+    case 'H3_SCHOOL_DETAILS':   return 'GATEWAY';
+    case 'H3_STUDENT_DETAILS':  return 'H3_SCHOOL_DETAILS';
+    case 'H3_REPORT_TYPE':      return 'H3_STUDENT_DETAILS';
+    case 'H3_DEPARTURE_DETAILS': return 'H3_REPORT_TYPE';
+    case 'H3_REMARKS':
+      return (state.h3Report?.reportType === 'C' || state.h3Report?.reportType === 'D')
+        ? 'H3_DEPARTURE_DETAILS'
+        : 'H3_REPORT_TYPE';
+
+    // Form B — Stay Extension
+    case 'STAY_EXTENSION_DETAILS': return 'PASSPORT_DETAILS';
+
     case 'H1_REFERENCE':     return 'ELIGIBILITY';
 
     case 'PERSONAL_DETAILS':
@@ -164,6 +207,10 @@ export const getPreviousStep = (state: FormState): FormStep => {
     case 'PASSPORT_DETAILS':
       if (j === 'PASSPORT') return 'NATIONAL_STATUS';
       return 'PERSONAL_DETAILS';
+
+    case 'CHECK_YOUR_ANSWERS':
+      if (j === 'SCHOOL_REPORT') return 'H3_REMARKS';
+      return 'EVIDENCE_UPLOAD';
 
     case 'NEXT_OF_KIN':      return 'PASSPORT_DETAILS';
 
@@ -208,7 +255,6 @@ export const getPreviousStep = (state: FormState): FormStep => {
       if (j === 'CITIZENSHIP' || j === 'RESIDENCY') return 'EXCLUDED_CLASSES';
       return 'DEPENDANT_DETAILS';
 
-    case 'CHECK_YOUR_ANSWERS': return 'EVIDENCE_UPLOAD';
     case 'PAYMENT':           return 'CHECK_YOUR_ANSWERS';
 
     default: return 'GATEWAY';

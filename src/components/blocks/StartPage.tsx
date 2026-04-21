@@ -70,6 +70,27 @@ export const StartPage: React.FC = () => {
         'Full family details including spouse and children'
       ],
       time: '45+ minutes'
+    },
+    STAY_EXTENSION: {
+      title: 'Extend Your Stay in Barbados',
+      desc: 'Apply to vary or extend the period of your current permitted stay under the Immigration Act (Form B).',
+      needs: [
+        'Your passport (valid)',
+        'Details of your current permitted period of stay',
+        'Reasons for requesting an extension',
+        'Any previous extension details'
+      ],
+      time: '20 to 30 minutes'
+    },
+    SCHOOL_REPORT: {
+      title: 'Submit a Student Status Report',
+      desc: 'For authorised school officials — report a change in a non-immigrant student\'s attendance, enrolment, or departure (Form H-3).',
+      needs: [
+        'Your school\'s official registration details',
+        'The student\'s passport and personal details',
+        'Details of the circumstances being reported'
+      ],
+      time: '15 to 20 minutes'
     }
   };
 

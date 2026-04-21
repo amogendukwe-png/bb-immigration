@@ -27,6 +27,12 @@ import { NationalStatusBlock } from './components/blocks/NationalStatusBlock';
 import { NextOfKinBlock } from './components/blocks/NextOfKinBlock';
 import { LostPassportBlock } from './components/blocks/LostPassportBlock';
 import { ParentsConsentBlock } from './components/blocks/ParentsConsentBlock';
+import { StayExtensionDetailsBlock } from './components/blocks/StayExtensionDetailsBlock';
+import { H3SchoolDetailsBlock } from './components/blocks/H3SchoolDetailsBlock';
+import { H3StudentDetailsBlock } from './components/blocks/H3StudentDetailsBlock';
+import { H3ReportTypeBlock } from './components/blocks/H3ReportTypeBlock';
+import { H3DepartureDetailsBlock } from './components/blocks/H3DepartureDetailsBlock';
+import { H3RemarksBlock } from './components/blocks/H3RemarksBlock';
 
 const PaymentSimulator: React.FC = () => {
   const { goToNext } = useForm();
@@ -102,6 +108,18 @@ const FormManager: React.FC = () => {
         return <H1ReferenceBlock />;
       case 'EXIT_INELIGIBLE':
         return <ExitIneligible />;
+      case 'STAY_EXTENSION_DETAILS':
+        return <StayExtensionDetailsBlock />;
+      case 'H3_SCHOOL_DETAILS':
+        return <H3SchoolDetailsBlock />;
+      case 'H3_STUDENT_DETAILS':
+        return <H3StudentDetailsBlock />;
+      case 'H3_REPORT_TYPE':
+        return <H3ReportTypeBlock />;
+      case 'H3_DEPARTURE_DETAILS':
+        return <H3DepartureDetailsBlock />;
+      case 'H3_REMARKS':
+        return <H3RemarksBlock />;
       case 'CHECK_YOUR_ANSWERS':
         return <CheckYourAnswersBlock />;
       case 'PAYMENT':
