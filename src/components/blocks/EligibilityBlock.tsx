@@ -36,22 +36,22 @@ export const EligibilityBlock: React.FC = () => {
 
   const renderPassportEligibility = () => (
     <>
-      <div className={`p-4 ${formErrors.age ? 'border-l-4 border-[var(--bb-red)]' : ''}`}>
+      <div className={`p-4 ${formErrors.age ? 'border-l-4 border-[var(--color-red-00)]' : ''}`}>
         <fieldset className="space-y-4">
           <legend className="text-xl font-bold mb-2">How old is the person the passport is for?</legend>
-          {formErrors.age && <span className="text-[var(--bb-red)] font-bold block mb-2">{formErrors.age}</span>}
+          {formErrors.age && <span className="text-[var(--color-red-00)] font-bold block mb-2">{formErrors.age}</span>}
           <div className="flex flex-col gap-3">
-            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
               <input
-                type="radio" name="age" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+                type="radio" name="age" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
                 checked={state.subType === 'CHILD'}
                 onChange={() => updateState({ subType: 'CHILD', age: 15 })}
               />
               <span className="text-lg">Under 16 years of age</span>
             </label>
-            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
               <input
-                type="radio" name="age" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+                type="radio" name="age" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
                 checked={state.subType === 'ADULT'}
                 onChange={() => updateState({ subType: 'ADULT', age: 18 })}
               />
@@ -61,22 +61,22 @@ export const EligibilityBlock: React.FC = () => {
         </fieldset>
       </div>
 
-      <div className={`p-4 ${formErrors.isBarbadosCitizen ? 'border-l-4 border-[var(--bb-red)]' : ''}`}>
+      <div className={`p-4 ${formErrors.isBarbadosCitizen ? 'border-l-4 border-[var(--color-red-00)]' : ''}`}>
         <fieldset className="space-y-4">
           <legend className="text-xl font-bold mb-2">Is the applicant a Citizen of Barbados?</legend>
-          {formErrors.isBarbadosCitizen && <span className="text-[var(--bb-red)] font-bold block mb-2">{formErrors.isBarbadosCitizen}</span>}
+          {formErrors.isBarbadosCitizen && <span className="text-[var(--color-red-00)] font-bold block mb-2">{formErrors.isBarbadosCitizen}</span>}
           <div className="flex flex-col gap-3">
-            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
               <input
-                type="radio" name="isCitizen" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+                type="radio" name="isCitizen" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
                 checked={state.isBarbadosCitizen === true}
                 onChange={() => updateState({ isBarbadosCitizen: true })}
               />
               <span className="text-lg">Yes</span>
             </label>
-            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+            <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
               <input
-                type="radio" name="isCitizen" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+                type="radio" name="isCitizen" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
                 checked={state.isBarbadosCitizen === false}
                 onChange={() => updateState({ isBarbadosCitizen: false })}
               />
@@ -89,14 +89,14 @@ export const EligibilityBlock: React.FC = () => {
   );
 
   const renderWorkPermitEligibility = () => (
-    <div className={`p-4 ${formErrors.subType ? 'border-l-4 border-[var(--bb-red)]' : ''}`}>
+    <div className={`p-4 ${formErrors.subType ? 'border-l-4 border-[var(--color-red-00)]' : ''}`}>
       <fieldset className="space-y-4">
         <legend className="text-xl font-bold mb-2">Select the type of work permit you are applying for</legend>
-        {formErrors.subType && <span className="text-[var(--bb-red)] font-bold block mb-2">{formErrors.subType}</span>}
+        {formErrors.subType && <span className="text-[var(--color-red-00)] font-bold block mb-2">{formErrors.subType}</span>}
         <div className="flex flex-col gap-3">
-          <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+          <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
             <input
-              type="radio" name="subType" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+              type="radio" name="subType" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
               checked={state.subType === 'C2'}
               onChange={() => updateState({ subType: 'C2' })}
             />
@@ -105,9 +105,9 @@ export const EligibilityBlock: React.FC = () => {
               <span className="text-sm opacity-70 italic">For stays longer than 6 months</span>
             </div>
           </label>
-          <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+          <label className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
             <input
-              type="radio" name="subType" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+              type="radio" name="subType" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
               checked={state.subType === 'C3'}
               onChange={() => updateState({ subType: 'C3' })}
             />
@@ -122,19 +122,19 @@ export const EligibilityBlock: React.FC = () => {
   );
 
   const renderCitizenshipEligibility = () => (
-    <div className={`p-4 ${formErrors.subType ? 'border-l-4 border-[var(--bb-red)]' : ''}`}>
+    <div className={`p-4 ${formErrors.subType ? 'border-l-4 border-[var(--color-red-00)]' : ''}`}>
       <fieldset className="space-y-4">
         <legend className="text-xl font-bold mb-2">Select the basis of your citizenship claim</legend>
-        {formErrors.subType && <span className="text-[var(--bb-red)] font-bold block mb-2">{formErrors.subType}</span>}
+        {formErrors.subType && <span className="text-[var(--color-red-00)] font-bold block mb-2">{formErrors.subType}</span>}
         <div className="flex flex-col gap-3">
           {[
             { id: 'DESCENT', label: 'By Descent', desc: 'If one or both of your parents are citizens of Barbados' },
             { id: 'MARRIAGE', label: 'By Marriage', desc: 'If you are married to a citizen of Barbados' },
             { id: 'REGISTRATION', label: 'By Registration', desc: 'Commonwealth citizens or other registration routes' }
           ].map(opt => (
-            <label key={opt.id} className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--bb-navy-mid)] transition-all">
+            <label key={opt.id} className="flex items-center gap-3 cursor-pointer group p-3 border-2 border-transparent hover:border-[var(--color-teal-00)] transition-all">
               <input
-                type="radio" name="subType" className="w-8 h-8 cursor-pointer accent-[var(--bb-navy-mid)]"
+                type="radio" name="subType" className="w-8 h-8 cursor-pointer accent-[var(--color-teal-00)]"
                 checked={state.subType === opt.id}
                 onChange={() => updateState({ subType: opt.id })}
               />
@@ -154,7 +154,7 @@ export const EligibilityBlock: React.FC = () => {
     if (journey === 'CITIZENSHIP') return renderCitizenshipEligibility();
 
     return (
-      <div className="p-4 bg-[var(--bb-gray)] border-l-4 border-[var(--bb-navy-mid)]">
+      <div className="p-4 bg-[var(--color-white-00)] border-l-4 border-[var(--color-teal-00)]">
         <p className="text-lg font-bold mb-2">Eligibility check for {journey}</p>
         <p>Please confirm you satisfy the initial requirements listed on the previous page.</p>
       </div>
@@ -164,9 +164,9 @@ export const EligibilityBlock: React.FC = () => {
   return (
     <div className="space-y-8" id="eligibility-block">
       {Object.keys(formErrors).length > 0 && (
-        <div className="border-[4px] border-[var(--bb-red)] p-4 mb-8 bg-white" role="alert" id="error-summary">
-          <h2 className="text-[var(--bb-red)] text-xl font-bold mb-2">There is a problem</h2>
-          <ul className="text-[var(--bb-red)] list-inside list-disc underline font-medium">
+        <div className="border-[4px] border-[var(--color-red-00)] p-4 mb-8 bg-white" role="alert" id="error-summary">
+          <h2 className="text-[var(--color-red-00)] text-xl font-bold mb-2">There is a problem</h2>
+          <ul className="text-[var(--color-red-00)] list-inside list-disc underline font-medium">
             {Object.entries(formErrors).map(([key, value]) => (
               <li key={key}><a href={`#${key}`}>{value}</a></li>
             ))}
@@ -174,7 +174,7 @@ export const EligibilityBlock: React.FC = () => {
         </div>
       )}
 
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 underline decoration-2 decoration-[var(--bb-navy-mid)] underline-offset-8">Eligibility</h1>
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 underline decoration-2 decoration-[var(--color-teal-00)] underline-offset-8">Eligibility</h1>
       <p className="text-xl mb-4 opacity-80">Answer these questions to see if you can use this service.</p>
 
       <form onSubmit={validateAndSubmit} className="space-y-12">
@@ -182,7 +182,7 @@ export const EligibilityBlock: React.FC = () => {
 
         <button
           type="submit"
-          className="bg-[var(--bb-navy-mid)] text-white px-8 py-3 rounded-sm font-bold text-xl hover:bg-[var(--bb-navy-dark)] active:translate-y-1 transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[var(--bb-focus)]"
+          className="bg-[var(--color-teal-00)] text-white px-8 py-3 rounded-sm font-bold text-xl hover:bg-[var(--color-blue-00)] active:translate-y-1 transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[var(--color-teal-100)]"
           id="continue-button"
         >
           Continue

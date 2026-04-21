@@ -6,47 +6,50 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useForm } from '../../context/FormContext';
-import { ChevronLeft } from 'lucide-react';
+
+const GovBBLogo = () => (
+  <svg width="276" height="27" viewBox="0 0 276 27" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Government of Barbados">
+    <g>
+      <path d="M39.079 21.527C37.5026 21.527 36.103 21.1903 34.8802 20.5168C33.6721 19.8286 32.7219 18.8916 32.0294 17.7057C31.337 16.5051 30.9908 15.1288 30.9908 13.5769C30.9908 12.0249 31.337 10.6559 32.0294 9.47001C32.7219 8.26943 33.6721 7.3324 34.8802 6.65891C36.103 5.97077 37.5026 5.6267 39.079 5.6267C40.0219 5.6267 40.8911 5.7658 41.6867 6.04398C42.4823 6.32216 43.1821 6.71015 43.7861 7.20795C44.4049 7.69111 44.9205 8.24747 45.3331 8.87704L42.858 10.4144C42.6075 10.0191 42.276 9.66767 41.8635 9.3602C41.4657 9.05274 41.0237 8.81116 40.5376 8.63547C40.0514 8.45977 39.5652 8.37192 39.079 8.37192C38.1067 8.37192 37.2448 8.59886 36.4934 9.05274C35.7421 9.49197 35.1527 10.0996 34.7255 10.8756C34.2982 11.6515 34.0846 12.552 34.0846 13.5769C34.0846 14.5871 34.2909 15.4875 34.7034 16.2782C35.1307 17.0688 35.7273 17.691 36.4934 18.1449C37.2595 18.5841 38.1435 18.8038 39.1453 18.8038C39.8967 18.8038 40.567 18.6647 41.1563 18.3865C41.7456 18.0937 42.2171 17.691 42.5707 17.1786C42.9243 16.6661 43.1231 16.0659 43.1673 15.3777H39.5873V13.0278H46.0844V14.8946C46.055 16.3001 45.7382 17.5007 45.1342 18.4963C44.5301 19.4773 43.7051 20.2313 42.6591 20.7584C41.613 21.2708 40.4197 21.527 39.079 21.527Z"/>
+      <path d="M52.8353 21.527C51.7156 21.527 50.7138 21.2854 49.8298 20.8023C48.9606 20.3045 48.2755 19.6237 47.7746 18.7598C47.2884 17.896 47.0453 16.9004 47.0453 15.773C47.0453 14.6457 47.2884 13.6501 47.7746 12.7862C48.2608 11.9224 48.9385 11.2489 49.8077 10.7658C50.677 10.268 51.6714 10.0191 52.7911 10.0191C53.9255 10.0191 54.9273 10.268 55.7966 10.7658C56.6658 11.2489 57.3435 11.9224 57.8297 12.7862C58.3159 13.6501 58.559 14.6457 58.559 15.773C58.559 16.9004 58.3159 17.896 57.8297 18.7598C57.3435 19.6237 56.6658 20.3045 55.7966 20.8023C54.9421 21.2854 53.955 21.527 52.8353 21.527ZM52.8353 18.8477C53.3804 18.8477 53.8592 18.7159 54.2717 18.4524C54.6843 18.1888 55.001 17.8301 55.222 17.3763C55.4577 16.9077 55.5756 16.3733 55.5756 15.773C55.5756 15.1728 55.4577 14.6457 55.222 14.1918C54.9863 13.7233 54.6548 13.3572 54.2275 13.0937C53.815 12.8302 53.3362 12.6984 52.7911 12.6984C52.2607 12.6984 51.7819 12.8302 51.3547 13.0937C50.9421 13.3572 50.618 13.7233 50.3823 14.1918C50.1466 14.6457 50.0287 15.1728 50.0287 15.773C50.0287 16.3733 50.1466 16.9077 50.3823 17.3763C50.618 17.8301 50.9495 18.1888 51.3768 18.4524C51.804 18.7159 52.2902 18.8477 52.8353 18.8477Z"/>
+      <path d="M12.5786 0C11.6253 2.46943 10.6536 5.03986 8.57466 7.00774C9.21998 6.80573 10.3493 6.62461 11.0753 6.64203V17.0283L7.988 17.4636C7.878 17.4532 7.84133 17.2895 7.84133 17.0666C7.54434 13.8413 6.74135 11.1316 5.81736 8.32779C5.75136 7.94466 4.58171 6.48181 5.4837 6.73955C5.5937 6.75348 6.80002 7.2202 6.60935 6.99729C4.96671 5.38119 2.56508 4.21788 0.233112 3.87306C0.0277812 3.8243 -0.0932171 3.92183 0.0901136 4.14822C3.18474 8.6726 5.77336 14.012 5.75136 20.3475C6.95401 20.3475 9.86897 19.6718 11.0753 19.6718V27H12.5969L12.9453 6.53406L12.5786 0Z"/>
+      <path d="M12.5786 0C13.5319 2.46943 14.5036 5.03986 16.5825 7.00774C15.9372 6.80573 14.8079 6.62461 14.0819 6.64203V17.0283L17.1692 17.4636C17.2792 17.4532 17.3159 17.2895 17.3159 17.0666C17.6129 13.8413 18.4158 11.1316 19.3398 8.32779C19.4058 7.94466 20.5755 6.48181 19.6735 6.73955C19.5635 6.75348 18.3572 7.2202 18.5478 6.99729C20.1905 5.38119 22.5921 4.21788 24.9241 3.87306C25.1294 3.8243 25.2504 3.92183 25.0671 4.14822C21.9725 8.6726 19.3838 14.012 19.4058 20.3475C18.2032 20.3475 15.2882 19.6718 14.0819 19.6718V27H12.5603L12.2119 6.53406L12.5786 0Z"/>
+    </g>
+  </svg>
+);
 
 export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { state, goToPrevious } = useForm();
   const showBack = state.currentStep !== 'START_PAGE' && state.currentStep !== 'GATEWAY';
 
   return (
-    <div className="min-h-screen font-sans" style={{ backgroundColor: 'var(--bb-gray)', color: 'var(--bb-text-dark)' }}>
+    <div style={{ fontFamily: 'Figtree, -apple-system, system-ui, sans-serif', color: 'var(--color-black-00)', background: 'var(--color-white-00)', minHeight: '100vh', display: 'grid', gridTemplateRows: 'auto 1fr auto' }}>
 
-      {/* ── Government Header ───────────────────────────────── */}
-      <header style={{ backgroundColor: 'var(--bb-navy-dark)', borderBottom: '6px solid var(--bb-navy-mid)' }}>
-        <div className="max-w-[960px] mx-auto px-4 py-4 flex items-center gap-4">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: 'var(--bb-white)' }}
-            aria-hidden="true"
-          >
-            <span style={{ color: 'var(--bb-navy-dark)', fontWeight: 700, fontSize: '0.85rem' }}>BB</span>
-          </div>
-          <span style={{ color: 'var(--bb-white)', fontWeight: 700, fontSize: '1.1rem', letterSpacing: '0.02em' }}>
-            Government of Barbados
-          </span>
-          <div style={{ width: 1, height: 24, backgroundColor: 'var(--bb-navy-mid)', margin: '0 8px' }} />
-          <span style={{ color: 'var(--bb-banner-blue)', fontSize: '1rem' }}>Digital Services</span>
+      {/* ── Top bar ─────────────────────────────────────────── */}
+      <div style={{ backgroundColor: 'var(--color-blue-100)', color: 'var(--color-white-00)', padding: '0.5rem 0', fontSize: '0.875rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+          Official government website of Barbados
+        </div>
+      </div>
+
+      {/* ── Header ──────────────────────────────────────────── */}
+      <header style={{ backgroundColor: 'var(--color-yellow-100)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '1rem', color: 'var(--color-black-00)' }}>
+          <GovBBLogo />
         </div>
       </header>
 
-      {/* ── Alpha phase banner ──────────────────────────────── */}
-      <div style={{ backgroundColor: 'var(--bb-navy-mid)', padding: '6px 0' }}>
-        <div className="max-w-[960px] mx-auto px-4">
-          <p style={{ color: 'var(--bb-white)', fontSize: '0.875rem', margin: 0 }}>
-            <strong>ALPHA</strong>
-            {' — This is a prototype. Your '}
-            <a href="#" style={{ color: 'var(--bb-banner-blue)' }}>feedback</a>
-            {' will help us improve it.'}
-          </p>
+      {/* ── Alpha banner ────────────────────────────────────── */}
+      <div style={{ backgroundColor: 'var(--color-blue-10)', padding: '0.75rem 0', borderBottom: '1px solid var(--color-blue-40)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', fontSize: '1rem' }}>
+          This page is in{' '}
+          <a href="#" style={{ color: 'var(--color-teal-00)', textDecoration: 'underline' }}>Alpha</a>
+          . Your feedback will help us improve it.
         </div>
       </div>
 
       {/* ── Main content ────────────────────────────────────── */}
-      <main className="max-w-[960px] mx-auto px-4 py-8">
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1rem', width: '100%' }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={state.currentStep}
@@ -56,53 +59,39 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
             transition={{ duration: 0.2 }}
           >
             {showBack && (
-              <button
-                onClick={goToPrevious}
-                className="flex items-center gap-1 underline decoration-2 underline-offset-4 mb-6 transition-colors"
-                style={{ color: 'var(--bb-text-dark)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--bb-navy-mid)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--bb-text-dark)')}
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); goToPrevious(); }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-teal-00)', textDecoration: 'underline', marginBottom: '1.5rem', fontSize: '1.25rem' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-black-00)'; (e.currentTarget as HTMLElement).style.textDecoration = 'none'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-teal-00)'; (e.currentTarget as HTMLElement).style.textDecoration = 'underline'; }}
                 id="back-link"
               >
-                <ChevronLeft size={20} />
-                Back
-              </button>
+                ← Back
+              </a>
             )}
-
-            <div
-              className="p-6 md:p-12 shadow-sm"
-              style={{ backgroundColor: 'var(--bb-white)', borderBottom: '5px solid var(--bb-navy-mid)' }}
-            >
-              {children}
-            </div>
+            {children}
           </motion.div>
         </AnimatePresence>
       </main>
 
       {/* ── Footer ──────────────────────────────────────────── */}
-      <footer className="mt-12 py-12" style={{ backgroundColor: 'var(--bb-banner-blue)', borderTop: '1px solid var(--bb-border)' }}>
-        <div className="max-w-[960px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <footer style={{ backgroundColor: 'var(--color-blue-100)', color: 'var(--color-white-00)', padding: '3rem 0', marginTop: '3rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
           <div>
-            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--bb-navy-dark)' }}>
-              Government of Barbados
-            </h2>
-            <ul className="space-y-2 text-sm">
+            <p style={{ fontWeight: 700, marginBottom: '1rem' }}>Government of Barbados</p>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '1rem' }}>
               {['Privacy Policy', 'Terms and conditions', 'Accessibility statement', 'Cookie policy'].map(link => (
                 <li key={link}>
-                  <a
-                    href="#"
-                    className="underline decoration-1"
-                    style={{ color: 'var(--bb-navy-mid)' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--bb-navy-dark)')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--bb-navy-mid)')}
-                  >
-                    {link}
-                  </a>
+                  <a href="#" style={{ color: 'var(--color-white-00)', textDecoration: 'underline' }}
+                    onMouseEnter={e => (e.currentTarget.style.textDecoration = 'none')}
+                    onMouseLeave={e => (e.currentTarget.style.textDecoration = 'underline')}
+                  >{link}</a>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="text-sm flex items-end justify-end" style={{ color: 'var(--bb-text-gray)' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', fontSize: '0.875rem', opacity: 0.8 }}>
             &copy; {new Date().getFullYear()} Government of Barbados
           </div>
         </div>

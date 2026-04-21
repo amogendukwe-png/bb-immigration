@@ -36,13 +36,13 @@ export const SkillCategoryBlock: React.FC = () => {
   return (
     <div className="space-y-8" id="skill-category-block">
       {formErrors.skill && (
-        <div className="border-[4px] border-[var(--bb-red)] p-4 mb-8 bg-white" role="alert" id="error-summary">
-          <h2 className="text-[var(--bb-red)] text-xl font-bold mb-2">There is a problem</h2>
-          <p className="text-[var(--bb-red)] font-medium underline">{formErrors.skill}</p>
+        <div className="border-[4px] border-[var(--color-red-00)] p-4 mb-8 bg-white" role="alert" id="error-summary">
+          <h2 className="text-[var(--color-red-00)] text-xl font-bold mb-2">There is a problem</h2>
+          <p className="text-[var(--color-red-00)] font-medium underline">{formErrors.skill}</p>
         </div>
       )}
 
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 underline decoration-2 decoration-[var(--bb-navy-mid)] underline-offset-8 transition-all hover:decoration-opacity-50 tracking-tight">
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 underline decoration-2 decoration-[var(--color-teal-00)] underline-offset-8 transition-all hover:decoration-opacity-50 tracking-tight">
         Category of skill
       </h1>
       <p className="text-xl mb-12 opacity-80 leading-relaxed max-w-2xl">
@@ -56,14 +56,14 @@ export const SkillCategoryBlock: React.FC = () => {
               key={cat.id}
               className={`flex items-center gap-3 p-5 border-2 cursor-pointer transition-all ${
                 state.work?.skillCategory === cat.id 
-                  ? 'border-[var(--bb-navy-mid)] bg-[var(--bb-gray)]' 
-                  : 'border-[var(--bb-border)] hover:border-black'
+                  ? 'border-[var(--color-teal-00)] bg-[var(--color-white-00)]' 
+                  : 'border-[var(--color-black-00)] hover:border-black'
               }`}
             >
               <input
                 type="radio"
                 name="skill"
-                className="w-6 h-6 accent-[var(--bb-navy-mid)] transition-transform active:scale-95"
+                className="w-6 h-6 accent-[var(--color-teal-00)] transition-transform active:scale-95"
                 checked={state.work?.skillCategory === cat.id}
                 onChange={() => updateState({ work: { ...state.work, skillCategory: cat.id } })}
               />
@@ -72,10 +72,10 @@ export const SkillCategoryBlock: React.FC = () => {
           ))}
         </div>
 
-        <div className="pt-10 border-t border-[var(--bb-border)] mt-10">
+        <div className="pt-10 border-t border-[var(--color-black-00)] mt-10">
           <button
             type="submit"
-            className="bg-[var(--bb-navy-mid)] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--bb-navy-dark)] active:translate-y-1 transition-all shadow-lg focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
+            className="bg-[var(--color-teal-00)] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--color-blue-00)] active:translate-y-1 transition-all shadow-lg focus:ring-4 focus:ring-[var(--color-teal-100)] focus:outline-none"
           >
             Save and continue
           </button>

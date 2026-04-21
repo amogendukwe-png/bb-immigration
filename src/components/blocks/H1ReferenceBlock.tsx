@@ -42,13 +42,13 @@ export const H1ReferenceBlock: React.FC = () => {
       </div>
 
       <form onSubmit={validateAndSubmit} className="space-y-10 max-w-xl">
-        <div className={`flex flex-col gap-2 ${error ? 'border-l-4 border-[var(--bb-red)] pl-4' : ''}`}>
+        <div className={`flex flex-col gap-2 ${error ? 'border-l-4 border-[var(--color-red-00)] pl-4' : ''}`}>
           <label className="text-xl font-bold" htmlFor="h1-ref">Enter your Form H-1 reference number</label>
-          <span className="text-[var(--bb-text-gray)]">You can find this on the top right of your H-1 certificate, e.g. H1-2026-AB123</span>
-          {error && <span className="text-[var(--bb-red)] font-bold block mt-2">{error}</span>}
+          <span className="text-[var(--color-mid-grey-00)]">You can find this on the top right of your H-1 certificate, e.g. H1-2026-AB123</span>
+          {error && <span className="text-[var(--color-red-00)] font-bold block mt-2">{error}</span>}
           <input
             id="h1-ref"
-            className="border-2 border-black p-3 text-2xl font-mono uppercase focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
+            className="border-2 border-black p-3 text-2xl font-mono uppercase focus:ring-4 focus:ring-[var(--color-teal-100)] focus:outline-none"
             value={refValue}
             onChange={(e) => setRefValue(e.target.value)}
             placeholder="H1-XXXX-XXXX"
@@ -58,23 +58,23 @@ export const H1ReferenceBlock: React.FC = () => {
         <div className="pt-4 flex flex-col gap-6">
           <button
             type="submit"
-            className="bg-[var(--bb-navy-mid)] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--bb-navy-dark)] transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[var(--bb-focus)]"
+            className="bg-[var(--color-teal-00)] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--color-blue-00)] transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[var(--color-teal-100)]"
           >
             Check reference and continue
           </button>
 
-          <a href="#" className="flex items-center gap-2 text-[var(--bb-navy-mid)] hover:text-[#003078] font-bold text-lg underline underline-offset-4">
+          <a href="#" className="flex items-center gap-2 text-[var(--color-teal-00)] hover:text-[#003078] font-bold text-lg underline underline-offset-4">
             <HelpCircle size={20} />
             I don't have a Form H-1 reference number
           </a>
         </div>
       </form>
 
-      <section className="pt-12 border-t border-[var(--bb-border)] mt-12 opacity-80">
+      <section className="pt-12 border-t border-[var(--color-black-00)] mt-12 opacity-80">
         <h2 className="text-xl font-bold mb-4">Note for school officials</h2>
         <p className="text-lg max-w-2xl">
           If you are a school official looking to issue a Certificate of Eligibility, please sign in to the 
-          <a href="#" className="text-[var(--bb-navy-mid)] underline ml-1">Barbados School Portal</a>.
+          <a href="#" className="text-[var(--color-teal-00)] underline ml-1">Barbados School Portal</a>.
         </p>
       </section>
     </div>

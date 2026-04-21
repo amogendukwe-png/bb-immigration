@@ -33,7 +33,7 @@ export const GatewayBlock: React.FC = () => {
       id: 'CITIZENSHIP',
       title: 'Register Barbados citizenship',
       desc: 'By descent, marriage or other registration routes.',
-      color: 'bg-[var(--bb-navy-mid)]'
+      color: 'bg-[var(--color-teal-00)]'
     },
     {
       id: 'STUDY',
@@ -61,18 +61,18 @@ export const GatewayBlock: React.FC = () => {
           <button
             key={opt.id}
             onClick={() => handleSelect(opt.id as JourneyType)}
-            className="group flex items-stretch text-left border-2 border-[var(--bb-border)] hover:border-[var(--bb-navy-mid)] hover:bg-[var(--bb-gray)] transition-all focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
+            className="group flex items-stretch text-left border-2 border-[var(--color-black-00)] hover:border-[var(--color-teal-00)] hover:bg-[var(--color-white-00)] transition-all focus:ring-4 focus:ring-[var(--color-teal-100)] focus:outline-none"
             id={`service-${opt.id.toLowerCase()}`}
           >
             <div className={`w-3 ${opt.color} self-stretch`} />
             <div className="p-6 flex-grow flex items-center justify-between pointer-events-none">
               <div>
-                <h2 className="text-2xl font-bold mb-1 underline group-hover:text-[var(--bb-navy-mid)] decoration-2 underline-offset-4 tracking-tight">
+                <h2 className="text-2xl font-bold mb-1 underline group-hover:text-[var(--color-teal-00)] decoration-2 underline-offset-4 tracking-tight">
                   {opt.title}
                 </h2>
-                <p className="text-[var(--bb-text-gray)]">{opt.desc}</p>
+                <p className="text-[var(--color-mid-grey-00)]">{opt.desc}</p>
               </div>
-              <ChevronRight size={32} className="text-[var(--bb-navy-mid)] opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+              <ChevronRight size={32} className="text-[var(--color-teal-00)] opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </div>
           </button>
         ))}

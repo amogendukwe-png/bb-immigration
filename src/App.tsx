@@ -38,7 +38,7 @@ const PaymentSimulator: React.FC = () => {
     <button 
       onClick={handlePay}
       disabled={isProcessing}
-      className={`w-full bg-[var(--bb-navy-mid)] text-white px-8 py-4 rounded-sm font-bold text-xl hover:bg-[var(--bb-navy-dark)] transition-all flex items-center justify-center gap-3 ${isProcessing ? 'opacity-70 cursor-wait' : ''}`}
+      className={`w-full bg-[var(--color-teal-00)] text-white px-8 py-4 rounded-sm font-bold text-xl hover:bg-[var(--color-blue-00)] transition-all flex items-center justify-center gap-3 ${isProcessing ? 'opacity-70 cursor-wait' : ''}`}
     >
       {isProcessing ? (
         <>
@@ -93,12 +93,12 @@ const FormManager: React.FC = () => {
         return (
           <div className="space-y-8 max-w-xl">
             <h1 className="text-4xl font-bold">Processing payment</h1>
-            <div className="bg-white p-8 border-2 border-[var(--bb-border)] space-y-6 shadow-sm">
+            <div className="bg-white p-8 border-2 border-[var(--color-black-00)] space-y-6 shadow-sm">
               <div className="flex justify-between text-xl border-b pb-4">
                 <span>Application Fee</span>
                 <span className="font-bold">$100.00 BBD</span>
               </div>
-              <p className="text-[var(--bb-text-gray)] leading-relaxed">
+              <p className="text-[var(--color-mid-grey-00)] leading-relaxed">
                 In the live system, you would now be redirected to the secure government payment gateway <strong>EZPay+</strong> to complete your transaction.
               </p>
               <PaymentSimulator />
@@ -108,7 +108,7 @@ const FormManager: React.FC = () => {
       case 'CONFIRMATION':
         return (
           <div className="space-y-10 py-10 text-center max-w-2xl mx-auto">
-            <div className="bg-[var(--bb-navy-mid)] text-white p-8 rounded-sm shadow-lg transform scale-105">
+            <div className="bg-[var(--color-teal-00)] text-white p-8 rounded-sm shadow-lg transform scale-105">
               <h1 className="text-4xl font-bold mb-4">Application complete</h1>
               <p className="text-2xl">Your reference number is</p>
               <p className="text-5xl font-black mt-4 font-mono tracking-wider">PB-2026-X8V2K9</p>
@@ -124,10 +124,10 @@ const FormManager: React.FC = () => {
         );
       default:
         return (
-          <div className="py-20 text-center border-4 border-dashed border-[var(--bb-border)]">
-            <h1 className="text-3xl font-bold mb-4 text-[var(--bb-text-gray)]">Coming Soon: {state.currentStep}</h1>
+          <div className="py-20 text-center border-4 border-dashed border-[var(--color-black-00)]">
+            <h1 className="text-3xl font-bold mb-4 text-[var(--color-mid-grey-00)]">Coming Soon: {state.currentStep}</h1>
             <p className="text-xl opacity-60">This section is part of the alpha iterative release.</p>
-            <div className="mt-8 p-4 bg-[var(--bb-gray)] text-sm font-mono max-w-md mx-auto overflow-auto">
+            <div className="mt-8 p-4 bg-[var(--color-white-00)] text-sm font-mono max-w-md mx-auto overflow-auto">
                 Debug: {JSON.stringify(state, null, 2)}
             </div>
           </div>

@@ -79,21 +79,21 @@ export const StartPage: React.FC = () => {
     <div className="space-y-8" id="start-page">
       <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">{active.title}</h1>
       
-      <p className="text-xl leading-relaxed max-w-2xl opacity-90 underline decoration-1 decoration-[var(--bb-navy-mid)] underline-offset-4 decoration-opacity-20">
+      <p className="text-xl leading-relaxed max-w-2xl opacity-90 underline decoration-1 decoration-[var(--color-teal-00)] underline-offset-4 decoration-opacity-20">
         {active.desc}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
-        <div className="bg-[var(--bb-gray)] p-6 border-l-4 border-[var(--bb-navy-mid)]">
-          <div className="flex items-center gap-2 mb-4 text-[var(--bb-navy-mid)]">
+        <div className="bg-[var(--color-white-00)] p-6 border-l-4 border-[var(--color-teal-00)]">
+          <div className="flex items-center gap-2 mb-4 text-[var(--color-teal-00)]">
             <Clock size={24} />
             <h3 className="font-bold text-lg">How long it takes</h3>
           </div>
           <p className="text-lg">Around {active.time} to complete. You should complete it in one go as progress is not currently saved.</p>
         </div>
 
-        <div className="bg-[var(--bb-gray)] p-6 border-l-4 border-[var(--bb-navy-mid)]">
-          <div className="flex items-center gap-2 mb-4 text-[var(--bb-navy-mid)]">
+        <div className="bg-[var(--color-white-00)] p-6 border-l-4 border-[var(--color-teal-00)]">
+          <div className="flex items-center gap-2 mb-4 text-[var(--color-teal-00)]">
             <FileText size={24} />
             <h3 className="font-bold text-lg">Documents needed</h3>
           </div>
@@ -101,15 +101,15 @@ export const StartPage: React.FC = () => {
         </div>
       </div>
 
-      <section className="space-y-6 bg-white p-8 border-2 border-[var(--bb-border)] rounded-sm">
+      <section className="space-y-6 bg-white p-8 border-2 border-[var(--color-black-00)] rounded-sm">
         <h2 className="text-2xl font-bold flex items-center gap-2">
-          <CreditCard className="text-[var(--bb-navy-mid)]" />
+          <CreditCard className="text-[var(--color-teal-00)]" />
           What you will need
         </h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {active.needs.map((item: string, i: number) => (
             <li key={i} className="flex gap-3 text-lg">
-              <span className="text-[var(--bb-navy-mid)] font-bold">•</span>
+              <span className="text-[var(--color-teal-00)] font-bold">•</span>
               {item}
             </li>
           ))}
@@ -119,7 +119,7 @@ export const StartPage: React.FC = () => {
       <div className="pt-8">
         <button
           onClick={goToNext}
-          className="inline-flex items-center gap-3 bg-[var(--bb-navy-mid)] text-white px-10 py-5 rounded-sm font-bold text-2xl hover:bg-[var(--bb-navy-dark)] transition-all shadow-lg hover:shadow-xl active:translate-y-1 focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
+          className="inline-flex items-center gap-3 bg-[var(--color-teal-00)] text-white px-10 py-5 rounded-sm font-bold text-2xl hover:bg-[var(--color-blue-00)] transition-all shadow-lg hover:shadow-xl active:translate-y-1 focus:ring-4 focus:ring-[var(--color-teal-100)] focus:outline-none"
           id="start-now-button"
         >
           Start now
@@ -127,7 +127,7 @@ export const StartPage: React.FC = () => {
         </button>
       </div>
 
-      <section className="pt-12 border-t border-[var(--bb-border)] opacity-70">
+      <section className="pt-12 border-t border-[var(--color-black-00)] opacity-70">
         <h2 className="text-xl font-bold mb-4 italic">Before you start</h2>
         <p className="text-lg max-w-2xl">
           By starting this application, you agree that the information you provide is true and accurate. 
