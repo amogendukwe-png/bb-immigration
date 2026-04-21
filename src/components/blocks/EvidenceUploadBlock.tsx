@@ -30,26 +30,26 @@ export const EvidenceUploadBlock: React.FC = () => {
 
   return (
     <div className="space-y-8" id="evidence-upload-block">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 underline decoration-2 decoration-[#005ea5] underline-offset-8">Upload documents</h1>
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 underline decoration-2 decoration-[var(--bb-navy-mid)] underline-offset-8">Upload documents</h1>
       <p className="text-xl mb-12 opacity-80 max-w-2xl leading-relaxed italic">
         You must upload a clear digital copy of the following documents. We accept PDF, JPG, and PNG files up to 5MB each.
       </p>
 
       <div className="space-y-6 max-w-3xl">
         {currentDocs.map((doc) => (
-          <div key={doc} className={`p-6 border-2 flex items-center justify-between transition-all ${uploads[doc] ? 'border-[#00703c] bg-[#f3fcf6]' : 'border-[#b1b4b6] bg-white hover:border-[#005ea5]'}`}>
+          <div key={doc} className={`p-6 border-2 flex items-center justify-between transition-all ${uploads[doc] ? 'border-[var(--bb-navy-mid)] bg-[#f3fcf6]' : 'border-[var(--bb-border)] bg-white hover:border-[var(--bb-navy-mid)]'}`}>
             <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 flex items-center justify-center rounded-sm ${uploads[doc] ? 'bg-[#00703c] text-white' : 'bg-[#f3f2f1] text-[#505a5f]'}`}>
+              <div className={`w-12 h-12 flex items-center justify-center rounded-sm ${uploads[doc] ? 'bg-[var(--bb-navy-mid)] text-white' : 'bg-[var(--bb-gray)] text-[var(--bb-text-gray)]'}`}>
                 <FileIcon size={24} />
               </div>
               <div>
                 <h3 className="text-xl font-bold">{doc}</h3>
                 {uploads[doc] ? (
-                  <span className="text-[#00703c] flex items-center gap-1 font-bold">
+                  <span className="text-[var(--bb-navy-mid)] flex items-center gap-1 font-bold">
                     <CheckCircle2 size={16} /> Attached
                   </span>
                 ) : (
-                  <span className="text-[#505a5f] flex items-center gap-1">
+                  <span className="text-[var(--bb-text-gray)] flex items-center gap-1">
                     <AlertCircle size={16} /> Not yet uploaded
                   </span>
                 )}
@@ -58,7 +58,7 @@ export const EvidenceUploadBlock: React.FC = () => {
             
             <button
               onClick={() => handleFile(doc)}
-              className="group flex flex-col items-center gap-1 text-[#005ea5] hover:text-[#003078] transition-colors focus:ring-2 focus:ring-[#ffdd00] p-4 rounded-sm"
+              className="group flex flex-col items-center gap-1 text-[var(--bb-navy-mid)] hover:text-[#003078] transition-colors focus:ring-2 focus:ring-[var(--bb-focus)] p-4 rounded-sm"
               id={`upload-${doc.toLowerCase().replace(/ /g, '-')}`}
             >
               <Upload size={32} className="group-hover:-translate-y-1 transition-transform" />
@@ -68,10 +68,10 @@ export const EvidenceUploadBlock: React.FC = () => {
         ))}
       </div>
 
-      <div className="pt-12 border-t border-[#b1b4b6]">
+      <div className="pt-12 border-t border-[var(--bb-border)]">
         <button
           onClick={goToNext}
-          className="bg-[#00703c] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[#005a30] transition-all shadow-md active:translate-y-1 focus:ring-4 focus:ring-[#ffdd00] focus:outline-none"
+          className="bg-[var(--bb-navy-mid)] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--bb-navy-dark)] transition-all shadow-md active:translate-y-1 focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
         >
           Save and continue
         </button>

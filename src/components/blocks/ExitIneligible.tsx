@@ -22,19 +22,19 @@ export const ExitIneligible: React.FC = () => {
 
   return (
     <div className="space-y-8" id="exit-page">
-      <h1 className="text-3xl md:text-4xl font-bold text-[#d4351c]">{message}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-[var(--bb-red)]">{message}</h1>
       <p className="text-xl leading-relaxed max-w-2xl">{guidance}</p>
       
-      <div className="pt-8 border-t border-[#b1b4b6] mt-12">
+      <div className="pt-8 border-t border-[var(--bb-border)] mt-12">
         <h2 className="text-xl font-bold mb-4">What to do next</h2>
         <p className="text-lg mb-4">
           You may need to contact the Barbados Immigration Department directly for further assistance.
         </p>
-        <div className="bg-[#f3f2f1] p-6 border-l-4 border-[#505a5f]">
+        <div className="bg-[var(--bb-gray)] p-6 border-l-4 border-[var(--bb-text-gray)]">
           <p className="font-bold">Immigration Department</p>
           <p>Careenage House, The Wharf</p>
           <p>Bridgetown, Barbados</p>
-          <p className="mt-2 text-[#005ea5] font-medium underline cursor-pointer">immigration.dept@barbados.gov.bb</p>
+          <p className="mt-2 text-[var(--bb-navy-mid)] font-medium underline cursor-pointer">immigration.dept@barbados.gov.bb</p>
         </div>
       </div>
     </div>

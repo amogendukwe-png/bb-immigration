@@ -1,1 +1,111 @@
 @import "tailwindcss";
+
+/* ── Barbados Government Design System Tokens ─────────────────── */
+:root {
+  /* Brand */
+  --bb-navy-dark:   #1f3864;
+  --bb-navy-mid:    #2e5f99;
+  --bb-white:       #ffffff;
+
+  /* Surface */
+  --bb-light-blue:  #ebf3fb;
+  --bb-banner-blue: #d6e4f0;
+  --bb-gray:        #f2f2f2;
+
+  /* Status */
+  --bb-green:       #e2f0ec;
+  --bb-amber:       #fdf3dc;
+  --bb-red-bg:      #fdecea;
+  --bb-red:         #c0392b;
+
+  /* Text */
+  --bb-text-dark:   #1a1a1a;
+  --bb-text-gray:   #444444;
+  --bb-border:      #cccccc;
+
+  /* Focus */
+  --bb-focus:       #ffbf00;
+}
+
+/* ── Base ─────────────────────────────────────────────────────── */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--bb-text-dark);
+  background-color: var(--bb-gray);
+}
+
+/* ── Focus ring ───────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 3px solid var(--bb-focus);
+  outline-offset: 2px;
+}
+
+/* ── Input base ───────────────────────────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  border: 2px solid var(--bb-text-dark);
+  padding: 0.5rem;
+  font-size: 1.125rem;
+  width: 100%;
+  background: var(--bb-white);
+  color: var(--bb-text-dark);
+  border-radius: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--bb-focus);
+  outline-offset: 0;
+}
+
+/* ── Radio / checkbox accent ──────────────────────────────────── */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--bb-navy-mid);
+}
+
+/* ── Primary button ───────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--bb-navy-mid);
+  color: var(--bb-white);
+  font-weight: 700;
+  font-size: 1.125rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--bb-navy-dark);
+}
+
+.btn-primary:focus {
+  outline: 3px solid var(--bb-focus);
+  outline-offset: 0;
+}
+
+/* ── Error summary ────────────────────────────────────────────── */
+.error-summary {
+  border: 4px solid var(--bb-red);
+  padding: 1rem;
+  background: var(--bb-red-bg);
+}
+
+.error-text {
+  color: var(--bb-red);
+  font-weight: 700;
+}
+
+/* ── Info / hint text ─────────────────────────────────────────── */
+.hint-text {
+  color: var(--bb-text-gray);
+  font-size: 1rem;
+}

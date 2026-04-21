@@ -37,9 +37,9 @@ export const AddressBlock: React.FC = () => {
   return (
     <div className="space-y-8" id="address-block">
       {Object.keys(formErrors).length > 0 && (
-        <div className="border-[4px] border-[#d4351c] p-4 mb-8 bg-white" role="alert" id="error-summary">
-          <h2 className="text-[#d4351c] text-xl font-bold mb-2">There is a problem</h2>
-          <ul className="text-[#d4351c] list-inside list-disc underline font-medium">
+        <div className="border-[4px] border-[var(--bb-red)] p-4 mb-8 bg-white" role="alert" id="error-summary">
+          <h2 className="text-[var(--bb-red)] text-xl font-bold mb-2">There is a problem</h2>
+          <ul className="text-[var(--bb-red)] list-inside list-disc underline font-medium">
             {Object.entries(formErrors).map(([key, value]) => (
               <li key={key}><a href={`#${key}`}>{value}</a></li>
             ))}
@@ -51,26 +51,26 @@ export const AddressBlock: React.FC = () => {
       <p className="text-xl mb-12 opacity-80">Provide your current and intended residential details.</p>
 
       <form onSubmit={validateAndSubmit} className="space-y-10 max-w-2xl">
-        <div className={`p-4 ${formErrors.current ? 'border-l-4 border-[#d4351c]' : ''}`}>
+        <div className={`p-4 ${formErrors.current ? 'border-l-4 border-[var(--bb-red)]' : ''}`}>
           <label className="text-xl font-bold mb-2 block" htmlFor="currentAddress">Current permanent residential address</label>
-          <span className="text-[#505a5f] block mb-4 italic">Include street, city/town, parish and country</span>
-          {formErrors.current && <span className="text-[#d4351c] font-bold block mb-2">{formErrors.current}</span>}
+          <span className="text-[var(--bb-text-gray)] block mb-4 italic">Include street, city/town, parish and country</span>
+          {formErrors.current && <span className="text-[var(--bb-red)] font-bold block mb-2">{formErrors.current}</span>}
           <textarea
             id="currentAddress"
             rows={4}
-            className="border-2 border-black p-4 text-xl w-full focus:ring-4 focus:ring-[#ffdd00] focus:outline-none uppercase"
+            className="border-2 border-black p-4 text-xl w-full focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none uppercase"
             value={addresses.current || ''}
             onChange={(e) => handleUpdate('current', e.target.value)}
           />
         </div>
 
-        <div className="p-4 border-l-4 border-[#b1b4b6] bg-[#f3f2f1]">
+        <div className="p-4 border-l-4 border-[var(--bb-border)] bg-[var(--bb-gray)]">
           <label className="text-xl font-bold mb-2 block" htmlFor="intendedAddress">Where applicable, intended address in Barbados</label>
-          <span className="text-[#505a5f] block mb-4">Leave blank if you already reside permanently in Barbados</span>
+          <span className="text-[var(--bb-text-gray)] block mb-4">Leave blank if you already reside permanently in Barbados</span>
           <textarea
             id="intendedAddress"
             rows={4}
-            className="border-2 border-[#b1b4b6] p-4 text-xl w-full focus:ring-4 focus:ring-[#ffdd00] focus:outline-none uppercase bg-white"
+            className="border-2 border-[var(--bb-border)] p-4 text-xl w-full focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none uppercase bg-white"
             value={addresses.intendedBarbados || ''}
             onChange={(e) => handleUpdate('intendedBarbados', e.target.value)}
           />
@@ -78,7 +78,7 @@ export const AddressBlock: React.FC = () => {
 
         <button
           type="submit"
-          className="bg-[#00703c] text-white px-8 py-3 rounded-sm font-bold text-xl hover:bg-[#005a30] active:translate-y-1 transition-all shadow-md focus:ring-4 focus:ring-[#ffdd00] focus:outline-none"
+          className="bg-[var(--bb-navy-mid)] text-white px-8 py-3 rounded-sm font-bold text-xl hover:bg-[var(--bb-navy-dark)] active:translate-y-1 transition-all shadow-md focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
           id="continue-button"
         >
           Save and continue

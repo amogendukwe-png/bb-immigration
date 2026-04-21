@@ -82,7 +82,7 @@ export const CheckYourAnswersBlock: React.FC = () => {
         {sections.filter(s => !s.hide).map((section) => (
           <section key={section.title} className="space-y-4">
             <h2 className="text-2xl font-bold border-b-2 border-black pb-2">{section.title}</h2>
-            <dl className="divide-y divide-[#b1b4b6]">
+            <dl className="divide-y divide-[var(--bb-border)]">
               {section.rows.map((row) => (
                 <div key={row.label} className="py-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <dt className="font-bold text-lg">{row.label}</dt>
@@ -90,7 +90,7 @@ export const CheckYourAnswersBlock: React.FC = () => {
                   <dd className="text-right">
                     <button 
                       onClick={() => handleEdit(section.step)}
-                      className="text-[#005ea5] underline decoration-2 underline-offset-4 font-bold hover:text-[#003078]"
+                      className="text-[var(--bb-navy-mid)] underline decoration-2 underline-offset-4 font-bold hover:text-[#003078]"
                     >
                       Change
                     </button>
@@ -102,13 +102,13 @@ export const CheckYourAnswersBlock: React.FC = () => {
         ))}
       </div>
 
-      <div className="pt-12 border-t border-[#b1b4b6] space-y-8">
+      <div className="pt-12 border-t border-[var(--bb-border)] space-y-8">
         <h2 className="text-3xl font-bold">Now send your application</h2>
         <p className="text-xl">By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
         
         <button
           onClick={goToNext}
-          className="bg-[#00703c] text-white px-12 py-4 rounded-sm font-bold text-2xl hover:bg-[#005a30] transition-all shadow-md active:translate-y-1"
+          className="bg-[var(--bb-navy-mid)] text-white px-12 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--bb-navy-dark)] transition-all shadow-md active:translate-y-1"
         >
           Accept and send
         </button>

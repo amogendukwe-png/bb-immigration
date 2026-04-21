@@ -31,7 +31,7 @@ export const ExcludedClassesBlock: React.FC = () => {
     <div className="space-y-8" id="excluded-classes-block">
       <h1 className="text-3xl md:text-4xl font-bold mb-8">Excluded classes</h1>
       
-      <div className="p-6 bg-[#f3f2f1] border-l-4 border-[#005ea5] mb-12 max-w-3xl">
+      <div className="p-6 bg-[var(--bb-gray)] border-l-4 border-[var(--bb-navy-mid)] mb-12 max-w-3xl">
         <h2 className="text-xl font-bold mb-4">Notice to applicants</h2>
         <p className="text-lg leading-relaxed opacity-90">
           The following classes of persons are excluded from registration as permanent residents or skilled nationals under the Immigration Act. 
@@ -45,10 +45,10 @@ export const ExcludedClassesBlock: React.FC = () => {
           
           <div className="space-y-4 max-w-4xl">
             {classes.map((cls) => (
-              <label key={cls.id} className="flex items-start gap-4 p-4 border-2 border-[#b1b4b6] hover:border-[#005ea5] cursor-pointer transition-all bg-white group">
+              <label key={cls.id} className="flex items-start gap-4 p-4 border-2 border-[var(--bb-border)] hover:border-[var(--bb-navy-mid)] cursor-pointer transition-all bg-white group">
                 <input
                   type="checkbox"
-                  className="w-8 h-8 mt-1 accent-[#005ea5] cursor-pointer"
+                  className="w-8 h-8 mt-1 accent-[var(--bb-navy-mid)] cursor-pointer"
                   checked={background.excludedClasses?.includes(cls.id) || false}
                   onChange={() => handleToggle(cls.id)}
                 />
@@ -58,13 +58,13 @@ export const ExcludedClassesBlock: React.FC = () => {
           </div>
         </fieldset>
 
-        <div className="pt-8 border-t border-[#b1b4b6] flex items-center justify-between max-w-4xl">
-          <p className="text-[#505a5f] max-w-md italic">
+        <div className="pt-8 border-t border-[var(--bb-border)] flex items-center justify-between max-w-4xl">
+          <p className="text-[var(--bb-text-gray)] max-w-md italic">
             If none apply, leave all boxes unchecked and continue.
           </p>
           <button
             type="submit"
-            className="bg-[#00703c] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[#005a30] transition-all shadow-md focus:ring-4 focus:ring-[#ffdd00] focus:outline-none"
+            className="bg-[var(--bb-navy-mid)] text-white px-10 py-4 rounded-sm font-bold text-2xl hover:bg-[var(--bb-navy-dark)] transition-all shadow-md focus:ring-4 focus:ring-[var(--bb-focus)] focus:outline-none"
           >
             Continue
           </button>
