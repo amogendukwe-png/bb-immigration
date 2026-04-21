@@ -7,6 +7,25 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useForm } from '../../context/FormContext';
 
+const TridentIcon: React.FC<{ size?: number }> = ({ size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    {/* Centre prong */}
+    <line x1="12" y1="3" x2="12" y2="21" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+    {/* Left prong */}
+    <line x1="6"  y1="3" x2="6"  y2="11" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+    {/* Right prong */}
+    <line x1="18" y1="3" x2="18" y2="11" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+    {/* Left tip */}
+    <polyline points="4.5,3 6,1 7.5,3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Centre tip */}
+    <polyline points="10.5,3 12,1 13.5,3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Right tip */}
+    <polyline points="16.5,3 18,1 19.5,3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Cross bar connecting all three prongs */}
+    <line x1="6" y1="10" x2="18" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
 export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { state, goToPrevious } = useForm();
   const isGateway = state.currentStep === 'GATEWAY';
@@ -38,8 +57,9 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
         <header style={{ backgroundColor: 'var(--color-yellow-100)', padding: '2.5rem 0 3.5rem' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
             {/* Logo */}
-            <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '2.5rem', letterSpacing: '-0.01em' }}>
-              Ψ Government of Barbados
+            <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '2.5rem', letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <TridentIcon size={28} />
+              Government of Barbados
             </div>
             {/* Hero */}
             <h1 style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.1rem)', fontWeight: 800, lineHeight: 1.1, maxWidth: '680px', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
@@ -61,20 +81,12 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
       ) : (
         /* Inner pages: slim yellow logo bar */
         <header style={{ backgroundColor: 'var(--color-yellow-100)', padding: '0.85rem 0' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', fontWeight: 800, fontSize: '1.1rem' }}>
-            Ψ Government of Barbados
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', fontWeight: 800, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <TridentIcon size={24} />
+            Government of Barbados
           </div>
         </header>
       )}
-
-      {/* ── Alpha banner ────────────────────────────────────────── */}
-      <div style={{ backgroundColor: 'var(--color-blue-10)', borderBottom: '1px solid var(--color-blue-40)', padding: '0.55rem 0', fontSize: '0.95rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          This page is in{' '}
-          <a href="#" style={{ color: 'var(--color-teal-00)', textDecoration: 'underline' }}>Alpha</a>
-          . Your feedback will help us improve it.
-        </div>
-      </div>
 
       {/* ── Main content ────────────────────────────────────────── */}
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem', width: '100%' }}>
