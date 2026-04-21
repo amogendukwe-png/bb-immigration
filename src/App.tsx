@@ -22,6 +22,11 @@ import { EvidenceUploadBlock } from './components/blocks/EvidenceUploadBlock';
 import { H1ReferenceBlock } from './components/blocks/H1ReferenceBlock';
 import { ExitIneligible } from './components/blocks/ExitIneligible';
 import { CheckYourAnswersBlock } from './components/blocks/CheckYourAnswersBlock';
+import { BornAbroadBlock } from './components/blocks/BornAbroadBlock';
+import { NationalStatusBlock } from './components/blocks/NationalStatusBlock';
+import { NextOfKinBlock } from './components/blocks/NextOfKinBlock';
+import { LostPassportBlock } from './components/blocks/LostPassportBlock';
+import { ParentsConsentBlock } from './components/blocks/ParentsConsentBlock';
 
 const PaymentSimulator: React.FC = () => {
   const { goToNext } = useForm();
@@ -83,6 +88,16 @@ const FormManager: React.FC = () => {
         return <ExcludedClassesBlock />;
       case 'EVIDENCE_UPLOAD':
         return <EvidenceUploadBlock />;
+      case 'BORN_ABROAD':
+        return <BornAbroadBlock />;
+      case 'NATIONAL_STATUS':
+        return <NationalStatusBlock />;
+      case 'NEXT_OF_KIN':
+        return <NextOfKinBlock />;
+      case 'LOST_PASSPORT':
+        return <LostPassportBlock />;
+      case 'PARENTS_CONSENT':
+        return <ParentsConsentBlock />;
       case 'H1_REFERENCE':
         return <H1ReferenceBlock />;
       case 'EXIT_INELIGIBLE':

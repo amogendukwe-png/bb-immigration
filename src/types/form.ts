@@ -3,19 +3,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type FormStep = 
+export type FormStep =
   | 'GATEWAY'
   | 'START_PAGE'
   | 'ELIGIBILITY'
-  | 'APPLICANT_DETAILS'
   | 'PERSONAL_DETAILS'
+  | 'BORN_ABROAD'
+  | 'NATIONAL_STATUS'
+  | 'PASSPORT_DETAILS'
+  | 'NEXT_OF_KIN'
+  | 'LOST_PASSPORT'
+  | 'PARENTS_CONSENT'
   | 'ADDRESS_BLOCK'
   | 'CONTACT_BLOCK'
-  | 'PASSPORT_DETAILS'
   | 'SKILL_CATEGORY'
   | 'PROFESSIONAL_AGENCY'
   | 'RESIDENCE_HISTORY'
-  | 'CROWN_SERVICE'
   | 'DEPENDANT_DETAILS'
   | 'H1_REFERENCE'
   | 'BACKGROUND_CHECKS'
@@ -26,7 +29,7 @@ export type FormStep =
   | 'CONFIRMATION'
   | 'EXIT_INELIGIBLE';
 
-export type JourneyType = 
+export type JourneyType =
   | 'PASSPORT'
   | 'WORK_PERMIT'
   | 'CITIZENSHIP'
@@ -36,16 +39,16 @@ export type JourneyType =
 export interface FormState {
   currentStep: FormStep;
   journeyType?: JourneyType;
-  subType?: string; // e.g., 'CHILD' vs 'ADULT' or 'DESCENT' vs 'MARRIAGE'
-  
-  // Eligibility & Initial Routing
-  age?: number;
+  subType?: string;
+
+  // Eligibility routing flags
+  age?: number;               // 15=child(<16), 17=young adult(16-17), 18=adult(18+)
   isBarbadosCitizen?: boolean;
-  isCaricomNational?: boolean;
-  hasValidPassport?: boolean;
-  relationshipToSubject?: 'SELF' | 'PARENT' | 'GUARDIAN' | 'AGENT';
-  
-  // Core Personal Details (Reused across forms)
+  isUnder18?: boolean;        // citizenship age gate
+  bornAbroad?: boolean;       // passport conditional
+  hasLostPassport?: boolean;  // passport conditional
+
+  // Personal Details
   personalDetails?: {
     title?: string;
     firstName?: string;
@@ -59,25 +62,71 @@ export interface FormState {
     sex?: 'MALE' | 'FEMALE' | 'OTHER';
     maritalStatus?: 'SINGLE' | 'MARRIED' | 'WIDOWED' | 'DIVORCED' | 'SEPARATED';
     occupation?: string;
+    height?: string;
+    marksOfIdentification?: string;
   };
 
-  // Passport Info (Reused)
+  // Born Abroad — passport conditional
+  bornAbroadDetails?: {
+    countryOfBirth?: string;
+    dateOfArrival?: string;
+    portOfEntry?: string;
+    howBecameCitizen?: string;
+  };
+
+  // National Status — passport
+  nationalStatus?: {
+    howAcquired?: 'BIRTH' | 'DESCENT' | 'REGISTRATION' | 'MARRIAGE' | 'NATURALISATION';
+    previousNationality?: string;
+    certificateNumber?: string;
+  };
+
+  // Passport / Travel Document
   passport?: {
     number?: string;
     expiryDate?: string;
     countryOfIssue?: string;
     dateOfIssue?: string;
     placeOfIssue?: string;
+    isFirst?: boolean;
   };
 
-  // Address & Residence (Reused)
+  // Next of Kin — passport
+  nextOfKin?: {
+    fullName?: string;
+    relationship?: string;
+    address?: string;
+    telephone?: string;
+  };
+
+  // Lost / Stolen / Damaged Passport
+  lostPassport?: {
+    isLost?: boolean;
+    previousPassportNumber?: string;
+    dateLastSeen?: string;
+    circumstances?: string;
+    policeReportNumber?: string;
+    policeStation?: string;
+  };
+
+  // Parental Consent — passport 16-17 only
+  parentsConsent?: {
+    parent1Name?: string;
+    parent1Nationality?: string;
+    parent1Relationship?: string;
+    parent2Name?: string;
+    parent2Nationality?: string;
+    consentGiven?: boolean;
+  };
+
+  // Address & Residence
   addresses?: {
     current?: string;
     intendedBarbados?: string;
     history?: { address: string; from: string; to: string }[];
   };
 
-  // Work & Skill (Specific to C2/C3/CARICOM)
+  // Work & Skill — C2/C3 only
   work?: {
     skillCategory?: string;
     employerName?: string;
@@ -85,7 +134,7 @@ export interface FormState {
     professionalAgency?: { name: string; address: string; tel: string };
   };
 
-  // Dependant Info (Repeatable)
+  // Dependants / Children
   dependants?: {
     id: string;
     fullName: string;
@@ -96,7 +145,7 @@ export interface FormState {
     passportNumber?: string;
   }[];
 
-  // Background & Vetting
+  // Background & Vetting — citizenship, residency
   background?: {
     healthIssue?: boolean;
     healthDetails?: string;
@@ -107,6 +156,14 @@ export interface FormState {
     visaRefusal?: boolean;
     visaDetails?: string;
     excludedClasses?: string[];
+  };
+
+  // H1 Reference — Study only
+  h1Reference?: {
+    institutionName?: string;
+    referenceNumber?: string;
+    courseStart?: string;
+    courseEnd?: string;
   };
 
   errors: Record<string, string>;
