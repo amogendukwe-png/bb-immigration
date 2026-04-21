@@ -45,13 +45,6 @@ export const GatewayBlock: React.FC = () => {
 
   return (
     <div id="services">
-      <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-        Immigration services
-      </h2>
-      <p style={{ fontSize: '1.05rem', color: 'var(--color-mid-grey-00)', marginBottom: '2rem' }}>
-        Select a service to begin your application.
-      </p>
-
       <div>
         {pathways.map((pathway, i) => (
           <div key={pathway.id}>
