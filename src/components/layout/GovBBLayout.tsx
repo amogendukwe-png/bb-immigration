@@ -29,7 +29,7 @@ const TridentIcon: React.FC<{ size?: number }> = ({ size = 24 }) => (
 export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { state, goToPrevious } = useForm();
   const isGateway = state.currentStep === 'GATEWAY';
-  const showBack = !isGateway && state.currentStep !== 'START_PAGE';
+  const showBack = !isGateway;
 
   return (
     <div style={{ fontFamily: 'Figtree, -apple-system, system-ui, sans-serif', color: 'var(--color-black-00)', background: 'var(--color-white-00)', minHeight: '100vh', display: 'grid', gridTemplateRows: 'auto 1fr auto' }}>
