@@ -51,31 +51,30 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
         </div>
       </div>
 
+      {/* ── Alpha banner — always above yellow, matching real site ── */}
+      <div style={{ backgroundColor: '#e8edf0', borderBottom: '1px solid #c8d0d8', padding: '0.55rem 0', fontSize: '0.95rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+          This page is in{' '}
+          <a href="#" style={{ color: 'var(--color-teal-00)', textDecoration: 'underline' }}>Alpha</a>
+          . Your feedback will help us improve it.
+        </div>
+      </div>
+
       {/* ── Header / Hero ────────────────────────────────────────── */}
       {isGateway ? (
-        /* Gateway page: full yellow hero matching alpha.gov.bb */
+        /* Gateway page: full yellow hero */
         <header style={{ backgroundColor: 'var(--color-yellow-100)', padding: '2.5rem 0 3.5rem' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-            {/* Logo */}
             <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '2.5rem', letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <TridentIcon size={28} />
               Government of Barbados
             </div>
-            {/* Hero */}
             <h1 style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.1rem)', fontWeight: 800, lineHeight: 1.1, maxWidth: '680px', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
-              How you find and use government services is changing
+              Barbados immigration and travel services
             </h1>
             <p style={{ fontSize: '1.2rem', maxWidth: '520px', marginBottom: '2rem', lineHeight: 1.5 }}>
-              It will be clearer, simpler and faster for citizens to get things done.
+              Apply for passports, work permits, citizenship, residency and student status online.
             </p>
-            <a
-              href="#services"
-              style={{ display: 'inline-block', backgroundColor: 'var(--color-teal-00)', color: 'var(--color-white-00)', padding: '0.8rem 1.6rem', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none', borderRadius: '2px' }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--color-blue-00)')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--color-teal-00)')}
-            >
-              Tell us what's important
-            </a>
           </div>
         </header>
       ) : (
