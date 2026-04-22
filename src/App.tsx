@@ -177,15 +177,18 @@ const FormManager: React.FC = () => {
         return <CheckYourAnswersBlock />;
       case 'PAYMENT':
         return (
-          <div className="space-y-8 max-w-xl">
-            <h1 className="text-4xl font-bold">Processing payment</h1>
-            <div className="bg-white p-8 border-2 border-[var(--color-black-00)] space-y-6 shadow-sm">
-              <div className="flex justify-between text-xl border-b pb-4">
-                <span>Application Fee</span>
-                <span className="font-bold">$100.00 BBD</span>
+          <div className="w-full max-w-xl space-y-8">
+            <h1 className="text-3xl md:text-4xl font-bold">Processing payment</h1>
+            <div className="bg-white p-4 md:p-8 border-2 border-[var(--color-black-00)] space-y-6">
+              <div className="border-b pb-4">
+                <div className="flex items-center justify-between gap-4 flex-wrap">
+                  <span className="text-xl">Application fee</span>
+                  <span className="text-xl font-bold">$100.00 BBD</span>
+                </div>
               </div>
               <p className="text-[var(--color-mid-grey-00)] leading-relaxed">
-                In the live system, you would now be redirected to the secure government payment gateway <strong>EZPay+</strong> to complete your transaction.
+                In the live system, you would be redirected to the secure government payment gateway{' '}
+                <strong>EZPay+</strong> to complete your transaction.
               </p>
               <PaymentSimulator />
             </div>
@@ -193,18 +196,37 @@ const FormManager: React.FC = () => {
         );
       case 'CONFIRMATION':
         return (
-          <div className="space-y-10 py-10 text-center max-w-2xl mx-auto">
-            <div className="bg-[var(--color-teal-00)] text-white p-8 rounded-sm shadow-lg transform scale-105">
-              <h1 className="text-4xl font-bold mb-4">Application complete</h1>
-              <p className="text-2xl">Your reference number is</p>
-              <p className="text-5xl font-black mt-4 font-mono tracking-wider">PB-2026-X8V2K9</p>
+          <div className="space-y-10 py-6 max-w-2xl">
+            <div className="bg-[var(--color-teal-00)] text-white p-6 md:p-10">
+              <div className="flex items-center gap-3 mb-4">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="20" cy="20" r="20" fill="rgba(255,255,255,0.2)"/>
+                  <path d="M11 20l7 7 11-14" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <h1 className="text-3xl md:text-4xl font-bold">Application submitted</h1>
+              </div>
+              <p className="text-xl mb-2">Your reference number is</p>
+              <p className="text-4xl md:text-5xl font-black font-mono tracking-wider mt-2">PB-2026-X8V2K9</p>
+              <p className="mt-4 opacity-80">Keep this number — you will need it if you contact us about your application.</p>
             </div>
-            <div className="space-y-4 text-left">
+
+            <div className="space-y-4">
               <h2 className="text-2xl font-bold">What happens next</h2>
-              <p className="text-xl opacity-80">
-                We have sent a confirmation email to your registered address. 
-                An immigration officer will review your application within 20 working days.
+              <p className="text-xl leading-relaxed">
+                We have sent a confirmation to your registered email address. An immigration officer will review your application within <strong>20 working days</strong>.
               </p>
+              <p className="text-xl leading-relaxed">
+                If we need additional information or documents, we will contact you using the details you provided.
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-[var(--color-black-00)]">
+              <button
+                onClick={() => { window.location.reload(); }}
+                className="bg-[var(--color-teal-00)] text-white px-8 py-4 text-xl font-bold hover:bg-[var(--color-blue-00)] transition-colors"
+              >
+                Start a new application
+              </button>
             </div>
           </div>
         );

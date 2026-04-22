@@ -7,7 +7,7 @@ import React from 'react';
 import { useForm } from '../../context/FormContext';
 
 export const N1EligibilityQuestionsBlock: React.FC = () => {
-  const { state, updateState, goToNext } = useForm();
+  const { state, updateState, goToNext, setStep } = useForm();
   const [formErrors, setFormErrors] = React.useState<Record<string, string>>({});
 
   const n1 = state.n1 || {};
@@ -34,24 +34,27 @@ export const N1EligibilityQuestionsBlock: React.FC = () => {
       return;
     }
 
-    // Eligibility gates — determine why they fail if applicable
+    // Eligibility gates — navigate directly to avoid stale-closure race condition
     if (n1.intendedToRemain === false) {
       updateState({ n1: { ...n1, eligible: false, ineligibilityReason: 'intent' } });
-      goToNext();
+      setStep('N1_EXIT_INELIGIBLE');
+      window.scrollTo(0, 0);
       return;
     }
     if (n1.goodCharacter === false) {
       updateState({ n1: { ...n1, eligible: false, ineligibilityReason: 'character' } });
-      goToNext();
+      setStep('N1_EXIT_INELIGIBLE');
+      window.scrollTo(0, 0);
       return;
     }
     if (n1.languageKnowledge === false) {
       updateState({ n1: { ...n1, eligible: false, ineligibilityReason: 'language' } });
-      goToNext();
+      setStep('N1_EXIT_INELIGIBLE');
+      window.scrollTo(0, 0);
       return;
     }
 
-    // All passed
+    // All passed — safe to use goToNext since routing doesn't depend on the update
     updateState({ n1: { ...n1, eligible: true, ineligibilityReason: undefined } });
     setFormErrors({});
     goToNext();

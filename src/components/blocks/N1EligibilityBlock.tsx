@@ -7,7 +7,7 @@ import React from 'react';
 import { useForm } from '../../context/FormContext';
 
 export const N1EligibilityBlock: React.FC = () => {
-  const { state, updateState, goToNext } = useForm();
+  const { state, updateState, goToNext, setStep } = useForm();
   const [error, setError] = React.useState('');
 
   const n1 = state.n1 || {};
@@ -23,7 +23,14 @@ export const N1EligibilityBlock: React.FC = () => {
       return;
     }
     setError('');
-    goToNext();
+    // Navigate directly to avoid stale-closure race condition on applicantType
+    if (n1.applicantType === 'NEITHER') {
+      setStep('N1_EXIT_INELIGIBLE');
+      window.scrollTo(0, 0);
+    } else {
+      setStep('N1_ELIGIBILITY_QUESTIONS');
+      window.scrollTo(0, 0);
+    }
   };
 
   const options: { val: 'ALIEN' | 'BPP' | 'NEITHER'; label: string; hint: string }[] = [
