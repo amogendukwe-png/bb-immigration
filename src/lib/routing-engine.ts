@@ -30,6 +30,11 @@ import { FormState, FormStep } from '../types/form';
  *                    → sponsor → evidence → check → payment → confirmation
  *  RENUNCIATION    — start page → personal → renunciation details → declaration
  *                    → check → confirmation (no payment)
+ *  NATURALISATION  — start page → N1 eligibility → personal → passport → address
+ *                    → residence history → N1 referees → N1 declaration
+ *                    → evidence → check → payment → confirmation
+ *  MEDICAL_FORM    — start page → medical applicant → medical history → physician section
+ *                    → check → confirmation (no payment)
  */
 export const getNextStep = (state: FormState): FormStep => {
   const j = state.journeyType;
@@ -47,6 +52,10 @@ export const getNextStep = (state: FormState): FormStep => {
       if (j === 'STAY_EXTENSION' || j === 'STUDENT_TRANSFER' || j === 'RE_ENTRY' || j === 'RENUNCIATION') {
         return 'PERSONAL_DETAILS';
       }
+      // Medical Form goes straight to its own applicant screen
+      if (j === 'MEDICAL_FORM') return 'MED_APPLICANT';
+      // Naturalisation has its own eligibility check screen
+      if (j === 'NATURALISATION') return 'N1_ELIGIBILITY_CHECK';
       return 'ELIGIBILITY';
 
     // ── Eligibility ────────────────────────────────────────────────
@@ -64,13 +73,29 @@ export const getNextStep = (state: FormState): FormStep => {
       return 'PERSONAL_DETAILS';
 
     // ── Personal Details ───────────────────────────────────────────
+    // ── Naturalisation: eligibility check ─────────────────────────
+    case 'N1_ELIGIBILITY_CHECK':
+      if (state.isBarbadosCitizen === true) return 'EXIT_INELIGIBLE';
+      return 'PERSONAL_DETAILS';
+
+    // ── Medical Form ───────────────────────────────────────────────
+    case 'MED_APPLICANT':
+      return 'MED_HISTORY';
+
+    case 'MED_HISTORY':
+      return 'MED_PHYSICIAN';
+
+    case 'MED_PHYSICIAN':
+      return 'CHECK_YOUR_ANSWERS';
+
+    // ── Personal Details ───────────────────────────────────────────
     case 'PERSONAL_DETAILS':
       if (j === 'PASSPORT') {
         return state.bornAbroad ? 'BORN_ABROAD' : 'NATIONAL_STATUS';
       }
       if (j === 'STUDY') return 'ADDRESS_BLOCK';
       if (j === 'RENUNCIATION') return 'RENUNCIATION_DETAILS';
-      // CITIZENSHIP, WORK_PERMIT, RESIDENCY, STAY_EXTENSION, STUDENT_TRANSFER, RE_ENTRY
+      // CITIZENSHIP, WORK_PERMIT, RESIDENCY, STAY_EXTENSION, STUDENT_TRANSFER, RE_ENTRY, NATURALISATION
       return 'PASSPORT_DETAILS';
 
     // ── Passport: Born Abroad ──────────────────────────────────────
@@ -137,12 +162,20 @@ export const getNextStep = (state: FormState): FormStep => {
     case 'PROFESSIONAL_AGENCY':
       return 'ADDRESS_BLOCK';
 
+    // ── Naturalisation: referees & declaration ─────────────────────
+    case 'N1_REFEREES':
+      return 'N1_DECLARATION';
+
+    case 'N1_DECLARATION':
+      return 'EVIDENCE_UPLOAD';
+
     // ── Address / Residence ────────────────────────────────────────
     case 'ADDRESS_BLOCK':
-      if (j === 'CITIZENSHIP' || j === 'RESIDENCY') return 'RESIDENCE_HISTORY';
+      if (j === 'CITIZENSHIP' || j === 'RESIDENCY' || j === 'NATURALISATION') return 'RESIDENCE_HISTORY';
       return 'CONTACT_BLOCK';
 
     case 'RESIDENCE_HISTORY':
+      if (j === 'NATURALISATION') return 'N1_REFEREES';
       return 'CONTACT_BLOCK';
 
     // ── Contact Block ──────────────────────────────────────────────
@@ -195,8 +228,8 @@ export const getNextStep = (state: FormState): FormStep => {
       return 'CHECK_YOUR_ANSWERS';
 
     case 'CHECK_YOUR_ANSWERS':
-      // No payment required for: School Report, Renunciation
-      if (j === 'SCHOOL_REPORT' || j === 'RENUNCIATION') return 'CONFIRMATION';
+      // No payment required for: School Report, Renunciation, Medical Form
+      if (j === 'SCHOOL_REPORT' || j === 'RENUNCIATION' || j === 'MEDICAL_FORM') return 'CONFIRMATION';
       return 'PAYMENT';
 
     case 'PAYMENT':
@@ -217,6 +250,16 @@ export const getPreviousStep = (state: FormState): FormStep => {
   switch (state.currentStep) {
     case 'START_PAGE':       return 'GATEWAY';
     case 'ELIGIBILITY':      return 'START_PAGE';
+
+    // Naturalisation — Form N.1
+    case 'N1_ELIGIBILITY_CHECK': return 'START_PAGE';
+    case 'N1_REFEREES':          return 'RESIDENCE_HISTORY';
+    case 'N1_DECLARATION':       return 'N1_REFEREES';
+
+    // Medical Form
+    case 'MED_APPLICANT':  return 'START_PAGE';
+    case 'MED_HISTORY':    return 'MED_APPLICANT';
+    case 'MED_PHYSICIAN':  return 'MED_HISTORY';
 
     // Form H-3
     case 'H3_SCHOOL_DETAILS':    return 'GATEWAY';
@@ -249,6 +292,7 @@ export const getPreviousStep = (state: FormState): FormStep => {
 
     case 'PERSONAL_DETAILS':
       if (j === 'STUDY') return 'H1_REFERENCE';
+      if (j === 'NATURALISATION') return 'N1_ELIGIBILITY_CHECK';
       // Journeys that skip ELIGIBILITY go back to START_PAGE
       if (j === 'STAY_EXTENSION' || j === 'STUDENT_TRANSFER' || j === 'RE_ENTRY' || j === 'RENUNCIATION') {
         return 'START_PAGE';
@@ -267,6 +311,7 @@ export const getPreviousStep = (state: FormState): FormStep => {
     case 'CHECK_YOUR_ANSWERS':
       if (j === 'SCHOOL_REPORT') return 'H3_REMARKS';
       if (j === 'RENUNCIATION') return 'RENUNCIATION_DECLARATION';
+      if (j === 'MEDICAL_FORM') return 'MED_PHYSICIAN';
       return 'EVIDENCE_UPLOAD';
 
     case 'NEXT_OF_KIN':      return 'PASSPORT_DETAILS';
@@ -286,7 +331,8 @@ export const getPreviousStep = (state: FormState): FormStep => {
       if (j === 'STUDY') return 'PERSONAL_DETAILS';
       return 'PERSONAL_DETAILS';
 
-    case 'RESIDENCE_HISTORY': return 'ADDRESS_BLOCK';
+    case 'RESIDENCE_HISTORY':
+      return 'ADDRESS_BLOCK';
 
     case 'CONTACT_BLOCK':
       if (j === 'CITIZENSHIP' || j === 'RESIDENCY') return 'RESIDENCE_HISTORY';
@@ -313,6 +359,7 @@ export const getPreviousStep = (state: FormState): FormStep => {
       if (j === 'STAY_EXTENSION') return 'STAY_EXTENSION_DETAILS';
       if (j === 'STUDENT_TRANSFER') return 'H4_REASONS';
       if (j === 'RE_ENTRY') return 'REENTRY_SPONSOR';
+      if (j === 'NATURALISATION') return 'N1_DECLARATION';
       return 'DEPENDANT_DETAILS';
 
     case 'PAYMENT': return 'CHECK_YOUR_ANSWERS';

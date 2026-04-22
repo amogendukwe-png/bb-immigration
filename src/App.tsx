@@ -41,6 +41,12 @@ import { ReEntryReasonsBlock } from './components/blocks/ReEntryReasonsBlock';
 import { ReEntrySponsorBlock } from './components/blocks/ReEntrySponsorBlock';
 import { RenunciationDetailsBlock } from './components/blocks/RenunciationDetailsBlock';
 import { RenunciationDeclarationBlock } from './components/blocks/RenunciationDeclarationBlock';
+import { N1EligibilityBlock } from './components/blocks/N1EligibilityBlock';
+import { N1RefereesBlock } from './components/blocks/N1RefereesBlock';
+import { N1DeclarationBlock } from './components/blocks/N1DeclarationBlock';
+import { MedApplicantBlock } from './components/blocks/MedApplicantBlock';
+import { MedHistoryBlock } from './components/blocks/MedHistoryBlock';
+import { MedPhysicianBlock } from './components/blocks/MedPhysicianBlock';
 
 const PaymentSimulator: React.FC = () => {
   const { goToNext } = useForm();
@@ -147,6 +153,20 @@ const FormManager: React.FC = () => {
         return <RenunciationDetailsBlock />;
       case 'RENUNCIATION_DECLARATION':
         return <RenunciationDeclarationBlock />;
+      // Naturalisation — Form N.1
+      case 'N1_ELIGIBILITY_CHECK':
+        return <N1EligibilityBlock />;
+      case 'N1_REFEREES':
+        return <N1RefereesBlock />;
+      case 'N1_DECLARATION':
+        return <N1DeclarationBlock />;
+      // Medical Examination Form
+      case 'MED_APPLICANT':
+        return <MedApplicantBlock />;
+      case 'MED_HISTORY':
+        return <MedHistoryBlock />;
+      case 'MED_PHYSICIAN':
+        return <MedPhysicianBlock />;
       case 'CHECK_YOUR_ANSWERS':
         return <CheckYourAnswersBlock />;
       case 'PAYMENT':

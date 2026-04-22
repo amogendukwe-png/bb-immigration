@@ -66,14 +66,12 @@ const pathways: {
   {
     id: 'NATURALISATION',
     title: 'Apply for naturalisation (Form N.1)',
-    desc: 'Apply to become a Barbadian citizen by naturalisation after five years of legal residence.',
-    comingSoon: true,
+    desc: 'Apply to become a Barbadian citizen by naturalisation after five years of legal residence in Barbados.',
   },
   {
     id: 'MEDICAL_FORM',
     title: 'Submit a medical examination report',
-    desc: 'Required as part of other immigration applications. The examining physician and applicant must both complete sections.',
-    comingSoon: true,
+    desc: 'Required as part of other immigration applications. The applicant and an approved examining physician each complete separate sections.',
   },
 ];
 

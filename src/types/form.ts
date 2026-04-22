@@ -46,7 +46,15 @@ export type FormStep =
   | 'REENTRY_SPONSOR'
   // Renunciation of Citizenship
   | 'RENUNCIATION_DETAILS'
-  | 'RENUNCIATION_DECLARATION';
+  | 'RENUNCIATION_DECLARATION'
+  // Naturalisation — Form N.1
+  | 'N1_ELIGIBILITY_CHECK'
+  | 'N1_REFEREES'
+  | 'N1_DECLARATION'
+  // Medical Examination Form
+  | 'MED_APPLICANT'
+  | 'MED_HISTORY'
+  | 'MED_PHYSICIAN';
 
 export type JourneyType =
   | 'PASSPORT'
@@ -269,6 +277,54 @@ export interface FormState {
     otherCitizenshipCertificate?: string;
     otherCitizenshipDate?: string;
     declarationConfirmed?: boolean;
+  };
+
+  // Naturalisation — Form N.1
+  n1?: {
+    applicantType?: 'ALIEN' | 'BPP';         // Alien or British Protected Person
+    yearsResident?: string;
+    intendedToRemain?: boolean;
+    goodCharacter?: boolean;
+    languageKnowledge?: boolean;
+    referees?: {
+      name: string;
+      address: string;
+      occupation: string;
+      nationality: string;
+      yearsKnown: string;
+    }[];
+    advertisementAcknowledged?: boolean;
+    jpWitnessAcknowledged?: boolean;
+    declarationConfirmed?: boolean;
+  };
+
+  // Medical Examination Form
+  medical?: {
+    // Applicant section
+    purposeOfExam?: string;
+    // Medical history
+    pastIllnesses?: string;
+    surgeries?: string;
+    currentMedications?: string;
+    allergies?: string;
+    mentalHealthHistory?: string;
+    // Physician section
+    examinationDate?: string;
+    heightCm?: string;
+    weightKg?: string;
+    bloodPressure?: string;
+    pulse?: string;
+    eyesAndEars?: string;
+    respiratorySystem?: string;
+    cardiovascularSystem?: string;
+    abdomen?: string;
+    skinAndLymph?: string;
+    hivTestResult?: string;
+    overallAssessment?: 'FIT' | 'FIT_WITH_CONDITIONS' | 'UNFIT';
+    assessmentNotes?: string;
+    physicianName?: string;
+    physicianRegistration?: string;
+    physicianAddress?: string;
   };
 
   errors: Record<string, string>;
