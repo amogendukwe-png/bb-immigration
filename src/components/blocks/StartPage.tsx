@@ -129,14 +129,27 @@ export const StartPage: React.FC = () => {
     },
     NATURALISATION: {
       title: 'Apply for Naturalisation (Form N.1)',
-      desc: 'Apply to become a Barbadian citizen by naturalisation after qualifying residence.',
-      needs: [],
-      time: '45+ minutes'
+      desc: 'Apply to become a Barbadian citizen by naturalisation. Aliens must have resided continuously in Barbados for at least 5 years; British Protected Persons for at least 1 year.',
+      needs: [
+        'Your passport (valid)',
+        'Proof of continuous residence in Barbados (e.g. utility bills, rental agreements)',
+        'Details of four Barbadian national referees who can vouch for your character',
+        'Evidence that you have published a notice of intention to apply in a local newspaper',
+        'A Justice of the Peace to witness your signed declaration in person',
+        'Medical examination report',
+        'Application fee ($100 BBD)'
+      ],
+      time: '45 to 60 minutes'
     },
     MEDICAL_FORM: {
       title: 'Medical Examination Report',
-      desc: 'Required as part of other immigration applications.',
-      needs: [],
+      desc: 'Required as part of certain immigration applications. The applicant and an approved examining physician must each complete separate sections.',
+      needs: [
+        'Your passport or national identification',
+        'Details of any previous illnesses, surgeries or current medications',
+        'An approved examining physician registered with the Medical Council of Barbados',
+        'The physician must examine you in person before completing their section'
+      ],
       time: '15 to 20 minutes'
     }
   };
