@@ -62,14 +62,31 @@ const PaymentSimulator: React.FC = () => {
   };
 
   return (
-    <button 
+    <button
       onClick={handlePay}
       disabled={isProcessing}
-      className={`w-full bg-[var(--color-teal-00)] text-white px-8 py-4 rounded-sm font-bold text-xl hover:bg-[var(--color-blue-00)] transition-all flex items-center justify-center gap-3 ${isProcessing ? 'opacity-70 cursor-wait' : ''}`}
+      style={{
+        width: '100%',
+        background: isProcessing ? 'var(--color-teal-00)' : 'var(--color-teal-00)',
+        color: 'white',
+        padding: '1rem 2rem',
+        fontWeight: 700,
+        fontSize: '1.25rem',
+        border: 'none',
+        cursor: isProcessing ? 'wait' : 'pointer',
+        opacity: isProcessing ? 0.7 : 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.75rem',
+        transition: 'background 0.2s',
+      }}
+      onMouseEnter={e => { if (!isProcessing) (e.currentTarget as HTMLElement).style.background = 'var(--color-blue-00)'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'var(--color-teal-00)'; }}
     >
       {isProcessing ? (
         <>
-          <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          <span style={{ width: '1.25rem', height: '1.25rem', border: '2px solid white', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />
           Processing...
         </>
       ) : (
@@ -177,16 +194,16 @@ const FormManager: React.FC = () => {
         return <CheckYourAnswersBlock />;
       case 'PAYMENT':
         return (
-          <div className="w-full max-w-xl space-y-8">
-            <h1 className="text-3xl md:text-4xl font-bold">Processing payment</h1>
-            <div className="bg-white p-4 md:p-8 border-2 border-[var(--color-black-00)] space-y-6">
-              <div className="border-b pb-4">
-                <div className="flex items-center justify-between gap-4 flex-wrap">
-                  <span className="text-xl">Application fee</span>
-                  <span className="text-xl font-bold">$100.00 BBD</span>
+          <div style={{ width: '100%', maxWidth: '560px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <h1 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: 800, lineHeight: 1.2 }}>Processing payment</h1>
+            <div style={{ background: 'white', padding: '2rem', border: '2px solid var(--color-black-00)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ borderBottom: '1px solid #e5e7eb', paddingBottom: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                  <span style={{ fontSize: '1.25rem' }}>Application fee</span>
+                  <span style={{ fontSize: '1.25rem', fontWeight: 700 }}>$100.00 BBD</span>
                 </div>
               </div>
-              <p className="text-[var(--color-mid-grey-00)] leading-relaxed">
+              <p style={{ color: 'var(--color-mid-grey-00)', lineHeight: 1.6 }}>
                 In the live system, you would be redirected to the secure government payment gateway{' '}
                 <strong>EZPay+</strong> to complete your transaction.
               </p>
@@ -196,34 +213,36 @@ const FormManager: React.FC = () => {
         );
       case 'CONFIRMATION':
         return (
-          <div className="space-y-10 py-6 max-w-2xl">
-            <div className="bg-[var(--color-teal-00)] text-white p-6 md:p-10">
-              <div className="flex items-center gap-3 mb-4">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <div style={{ width: '100%', maxWidth: '680px', display: 'flex', flexDirection: 'column', gap: '2.5rem', paddingTop: '1.5rem' }}>
+            <div style={{ background: 'var(--color-teal-00)', color: 'white', padding: '2.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{ flexShrink: 0 }}>
                   <circle cx="20" cy="20" r="20" fill="rgba(255,255,255,0.2)"/>
                   <path d="M11 20l7 7 11-14" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <h1 className="text-3xl md:text-4xl font-bold">Application submitted</h1>
+                <h1 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: 800, lineHeight: 1.2 }}>Application submitted</h1>
               </div>
-              <p className="text-xl mb-2">Your reference number is</p>
-              <p className="text-4xl md:text-5xl font-black font-mono tracking-wider mt-2">PB-2026-X8V2K9</p>
-              <p className="mt-4 opacity-80">Keep this number — you will need it if you contact us about your application.</p>
+              <p style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Your reference number is</p>
+              <p style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', fontWeight: 900, fontFamily: 'monospace', letterSpacing: '0.1em', marginTop: '0.5rem' }}>PB-2026-X8V2K9</p>
+              <p style={{ marginTop: '1rem', opacity: 0.85 }}>Keep this number — you will need it if you contact us about your application.</p>
             </div>
 
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold">What happens next</h2>
-              <p className="text-xl leading-relaxed">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>What happens next</h2>
+              <p style={{ fontSize: '1.25rem', lineHeight: 1.6 }}>
                 We have sent a confirmation to your registered email address. An immigration officer will review your application within <strong>20 working days</strong>.
               </p>
-              <p className="text-xl leading-relaxed">
+              <p style={{ fontSize: '1.25rem', lineHeight: 1.6 }}>
                 If we need additional information or documents, we will contact you using the details you provided.
               </p>
             </div>
 
-            <div className="pt-6 border-t border-[var(--color-black-00)]">
+            <div style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--color-black-00)' }}>
               <button
                 onClick={() => { window.location.reload(); }}
-                className="bg-[var(--color-teal-00)] text-white px-8 py-4 text-xl font-bold hover:bg-[var(--color-blue-00)] transition-colors"
+                style={{ background: 'var(--color-teal-00)', color: 'white', padding: '1rem 2rem', fontSize: '1.25rem', fontWeight: 700, border: 'none', cursor: 'pointer' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--color-blue-00)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'var(--color-teal-00)'; }}
               >
                 Start a new application
               </button>
