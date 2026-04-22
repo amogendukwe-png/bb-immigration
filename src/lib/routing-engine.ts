@@ -73,10 +73,17 @@ export const getNextStep = (state: FormState): FormStep => {
       return 'PERSONAL_DETAILS';
 
     // ── Personal Details ───────────────────────────────────────────
-    // ── Naturalisation: eligibility check ─────────────────────────
+    // ── Naturalisation: eligibility gate ──────────────────────────
     case 'N1_ELIGIBILITY_CHECK':
-      if (state.isBarbadosCitizen === true) return 'EXIT_INELIGIBLE';
+      if (state.n1?.applicantType === 'NEITHER') return 'N1_EXIT_INELIGIBLE';
+      return 'N1_ELIGIBILITY_QUESTIONS';
+
+    case 'N1_ELIGIBILITY_QUESTIONS':
+      if (state.n1?.eligible === false) return 'N1_EXIT_INELIGIBLE';
       return 'PERSONAL_DETAILS';
+
+    case 'N1_EXIT_INELIGIBLE':
+      return 'GATEWAY';
 
     // ── Medical Form ───────────────────────────────────────────────
     case 'MED_APPLICANT':
@@ -252,9 +259,11 @@ export const getPreviousStep = (state: FormState): FormStep => {
     case 'ELIGIBILITY':      return 'START_PAGE';
 
     // Naturalisation — Form N.1
-    case 'N1_ELIGIBILITY_CHECK': return 'START_PAGE';
-    case 'N1_REFEREES':          return 'RESIDENCE_HISTORY';
-    case 'N1_DECLARATION':       return 'N1_REFEREES';
+    case 'N1_ELIGIBILITY_CHECK':    return 'START_PAGE';
+    case 'N1_ELIGIBILITY_QUESTIONS': return 'N1_ELIGIBILITY_CHECK';
+    case 'N1_EXIT_INELIGIBLE':      return 'N1_ELIGIBILITY_QUESTIONS';
+    case 'N1_REFEREES':             return 'RESIDENCE_HISTORY';
+    case 'N1_DECLARATION':          return 'N1_REFEREES';
 
     // Medical Form
     case 'MED_APPLICANT':  return 'START_PAGE';
@@ -292,7 +301,7 @@ export const getPreviousStep = (state: FormState): FormStep => {
 
     case 'PERSONAL_DETAILS':
       if (j === 'STUDY') return 'H1_REFERENCE';
-      if (j === 'NATURALISATION') return 'N1_ELIGIBILITY_CHECK';
+      if (j === 'NATURALISATION') return 'N1_ELIGIBILITY_QUESTIONS';
       // Journeys that skip ELIGIBILITY go back to START_PAGE
       if (j === 'STAY_EXTENSION' || j === 'STUDENT_TRANSFER' || j === 'RE_ENTRY' || j === 'RENUNCIATION') {
         return 'START_PAGE';

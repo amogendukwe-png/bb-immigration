@@ -42,6 +42,8 @@ import { ReEntrySponsorBlock } from './components/blocks/ReEntrySponsorBlock';
 import { RenunciationDetailsBlock } from './components/blocks/RenunciationDetailsBlock';
 import { RenunciationDeclarationBlock } from './components/blocks/RenunciationDeclarationBlock';
 import { N1EligibilityBlock } from './components/blocks/N1EligibilityBlock';
+import { N1EligibilityQuestionsBlock } from './components/blocks/N1EligibilityQuestionsBlock';
+import { N1ExitIneligibleBlock } from './components/blocks/N1ExitIneligibleBlock';
 import { N1RefereesBlock } from './components/blocks/N1RefereesBlock';
 import { N1DeclarationBlock } from './components/blocks/N1DeclarationBlock';
 import { MedApplicantBlock } from './components/blocks/MedApplicantBlock';
@@ -156,6 +158,10 @@ const FormManager: React.FC = () => {
       // Naturalisation — Form N.1
       case 'N1_ELIGIBILITY_CHECK':
         return <N1EligibilityBlock />;
+      case 'N1_ELIGIBILITY_QUESTIONS':
+        return <N1EligibilityQuestionsBlock />;
+      case 'N1_EXIT_INELIGIBLE':
+        return <N1ExitIneligibleBlock />;
       case 'N1_REFEREES':
         return <N1RefereesBlock />;
       case 'N1_DECLARATION':

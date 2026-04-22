@@ -49,6 +49,8 @@ export type FormStep =
   | 'RENUNCIATION_DECLARATION'
   // Naturalisation — Form N.1
   | 'N1_ELIGIBILITY_CHECK'
+  | 'N1_ELIGIBILITY_QUESTIONS'
+  | 'N1_EXIT_INELIGIBLE'
   | 'N1_REFEREES'
   | 'N1_DECLARATION'
   // Medical Examination Form
@@ -281,11 +283,13 @@ export interface FormState {
 
   // Naturalisation — Form N.1
   n1?: {
-    applicantType?: 'ALIEN' | 'BPP';         // Alien or British Protected Person
+    applicantType?: 'ALIEN' | 'BPP' | 'NEITHER';
     yearsResident?: string;
     intendedToRemain?: boolean;
     goodCharacter?: boolean;
     languageKnowledge?: boolean;
+    eligible?: boolean;
+    ineligibilityReason?: string;
     referees?: {
       name: string;
       address: string;
