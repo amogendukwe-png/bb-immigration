@@ -43,6 +43,20 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
 
   return (
     <div style={{ fontFamily: 'Figtree, -apple-system, system-ui, sans-serif', color: 'var(--color-black-00)', background: 'var(--color-white-00)', minHeight: '100vh', display: 'grid', gridTemplateRows: 'auto 1fr auto' }}>
+      <style>{`
+        .govbb-logo-container { width: min(276px, 100%); height: 27px; }
+        .govbb-hero-header { padding: 2.5rem 0 3.5rem; }
+        .govbb-main { padding: 2rem 1.5rem; }
+        .govbb-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .govbb-footer-copy { display: flex; align-items: flex-end; justify-content: flex-end; font-size: 0.875rem; opacity: 0.7; }
+        @media (max-width: 640px) {
+          .govbb-logo-container { height: auto; }
+          .govbb-hero-header { padding: 1.25rem 0 1.75rem; }
+          .govbb-main { padding: 1rem 1rem; }
+          .govbb-footer-grid { grid-template-columns: 1fr; }
+          .govbb-footer-copy { justify-content: flex-start; margin-top: 0.5rem; }
+        }
+      `}</style>
 
       {/* ── Top bar ─────────────────────────────────────────────── */}
       <div style={{ backgroundColor: '#00267f', color: 'var(--color-white-00)', padding: '0.4rem 0', fontSize: '0.875rem' }}>
@@ -72,15 +86,15 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
       {/* ── Header / Hero ────────────────────────────────────────── */}
       {isGateway ? (
         /* Gateway page: full yellow hero */
-        <header style={{ backgroundColor: 'var(--color-yellow-100)', padding: '2.5rem 0 3.5rem' }}>
+        <header className="govbb-hero-header" style={{ backgroundColor: 'var(--color-yellow-100)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-            <div style={{ width: '276px', height: '27px', marginBottom: '2.5rem' }}>
+            <div className="govbb-logo-container" style={{ marginBottom: '2.5rem' }}>
               <GovBBLogo />
             </div>
-            <h1 style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.1rem)', fontWeight: 800, lineHeight: 1.1, maxWidth: '680px', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 4.5vw, 3.1rem)', fontWeight: 800, lineHeight: 1.1, maxWidth: '680px', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
               Barbados immigration and travel services
             </h1>
-            <p style={{ fontSize: '1.2rem', maxWidth: '520px', marginBottom: '2rem', lineHeight: 1.5 }}>
+            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', maxWidth: '520px', marginBottom: '2rem', lineHeight: 1.5 }}>
               Apply for passports, work permits, citizenship, residency and student status online.
             </p>
           </div>
@@ -89,7 +103,7 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
         /* Inner pages: slim yellow logo bar */
         <header style={{ backgroundColor: 'var(--color-yellow-100)', padding: '0.85rem 0' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-            <div style={{ width: '276px', height: '27px' }}>
+            <div className="govbb-logo-container">
               <GovBBLogo />
             </div>
           </div>
@@ -97,7 +111,7 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
       )}
 
       {/* ── Main content ────────────────────────────────────────── */}
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem', width: '100%' }}>
+      <main className="govbb-main" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={state.currentStep}
@@ -125,7 +139,7 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
 
       {/* ── Footer ──────────────────────────────────────────────── */}
       <footer style={{ backgroundColor: '#00267f', color: 'var(--color-white-00)', padding: '3rem 0', marginTop: '4rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+        <div className="govbb-footer-grid" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div>
             <p style={{ fontWeight: 700, marginBottom: '1rem' }}>Government of Barbados</p>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.95rem' }}>
@@ -139,7 +153,7 @@ export const GovBBLayout: React.FC<{ children: React.ReactNode }> = ({ children 
               ))}
             </ul>
           </div>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', fontSize: '0.875rem', opacity: 0.7 }}>
+          <div className="govbb-footer-copy">
             &copy; {new Date().getFullYear()} Government of Barbados
           </div>
         </div>

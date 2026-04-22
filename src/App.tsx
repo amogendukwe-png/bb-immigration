@@ -33,6 +33,14 @@ import { H3StudentDetailsBlock } from './components/blocks/H3StudentDetailsBlock
 import { H3ReportTypeBlock } from './components/blocks/H3ReportTypeBlock';
 import { H3DepartureDetailsBlock } from './components/blocks/H3DepartureDetailsBlock';
 import { H3RemarksBlock } from './components/blocks/H3RemarksBlock';
+import { H4CurrentInstitutionBlock } from './components/blocks/H4CurrentInstitutionBlock';
+import { H4TransferInstitutionBlock } from './components/blocks/H4TransferInstitutionBlock';
+import { H4ReasonsBlock } from './components/blocks/H4ReasonsBlock';
+import { ReEntryEnforcementBlock } from './components/blocks/ReEntryEnforcementBlock';
+import { ReEntryReasonsBlock } from './components/blocks/ReEntryReasonsBlock';
+import { ReEntrySponsorBlock } from './components/blocks/ReEntrySponsorBlock';
+import { RenunciationDetailsBlock } from './components/blocks/RenunciationDetailsBlock';
+import { RenunciationDeclarationBlock } from './components/blocks/RenunciationDeclarationBlock';
 
 const PaymentSimulator: React.FC = () => {
   const { goToNext } = useForm();
@@ -120,6 +128,25 @@ const FormManager: React.FC = () => {
         return <H3DepartureDetailsBlock />;
       case 'H3_REMARKS':
         return <H3RemarksBlock />;
+      // Form H-4 — Student Transfer
+      case 'H4_CURRENT_INSTITUTION':
+        return <H4CurrentInstitutionBlock />;
+      case 'H4_TRANSFER_INSTITUTION':
+        return <H4TransferInstitutionBlock />;
+      case 'H4_REASONS':
+        return <H4ReasonsBlock />;
+      // Re-Entry Application
+      case 'REENTRY_ENFORCEMENT':
+        return <ReEntryEnforcementBlock />;
+      case 'REENTRY_REASONS':
+        return <ReEntryReasonsBlock />;
+      case 'REENTRY_SPONSOR':
+        return <ReEntrySponsorBlock />;
+      // Renunciation of Citizenship
+      case 'RENUNCIATION_DETAILS':
+        return <RenunciationDetailsBlock />;
+      case 'RENUNCIATION_DECLARATION':
+        return <RenunciationDeclarationBlock />;
       case 'CHECK_YOUR_ANSWERS':
         return <CheckYourAnswersBlock />;
       case 'PAYMENT':

@@ -35,7 +35,18 @@ export type FormStep =
   | 'H3_STUDENT_DETAILS'
   | 'H3_REPORT_TYPE'
   | 'H3_DEPARTURE_DETAILS'
-  | 'H3_REMARKS';
+  | 'H3_REMARKS'
+  // Form H-4 — Student Transfer
+  | 'H4_CURRENT_INSTITUTION'
+  | 'H4_TRANSFER_INSTITUTION'
+  | 'H4_REASONS'
+  // Re-Entry Application
+  | 'REENTRY_ENFORCEMENT'
+  | 'REENTRY_REASONS'
+  | 'REENTRY_SPONSOR'
+  // Renunciation of Citizenship
+  | 'RENUNCIATION_DETAILS'
+  | 'RENUNCIATION_DECLARATION';
 
 export type JourneyType =
   | 'PASSPORT'
@@ -44,7 +55,12 @@ export type JourneyType =
   | 'STUDY'
   | 'RESIDENCY'
   | 'STAY_EXTENSION'
-  | 'SCHOOL_REPORT';
+  | 'SCHOOL_REPORT'
+  | 'STUDENT_TRANSFER'
+  | 'RE_ENTRY'
+  | 'RENUNCIATION'
+  | 'NATURALISATION'
+  | 'MEDICAL_FORM';
 
 export interface FormState {
   currentStep: FormStep;
@@ -209,6 +225,50 @@ export interface FormState {
     transportName?: string;
     addressAbroad?: string;
     remarks?: string;
+  };
+
+  // Form H-4 — Student Transfer
+  h4?: {
+    studentVisaNumber?: string;
+    visaIssueDate?: string;
+    visaExpiryDate?: string;
+    portOfEntry?: string;
+    dateOfEntry?: string;
+    currentInstitutionName?: string;
+    currentInstitutionAddress?: string;
+    terminationDate?: string;
+    isMidCourse?: boolean;
+    transferInstitutionName?: string;
+    transferInstitutionAddress?: string;
+    courseName?: string;
+    courseDuration?: string;
+    courseStartDate?: string;
+    courseEndDate?: string;
+    reasons?: string;
+  };
+
+  // Re-Entry Application
+  reEntry?: {
+    dateOfRemoval?: string;
+    portOfDeparture?: string;
+    reasonForRemoval?: string;
+    additionalCircumstances?: string;
+    reasonsForReturn?: string;
+    proposedEntryDate?: string;
+    intendedAddress?: string;
+    sponsorName?: string;
+    sponsorAddress?: string;
+    sponsorRelationship?: string;
+    sponsorPhone?: string;
+    sponsorEmail?: string;
+  };
+
+  // Renunciation of Citizenship
+  renunciation?: {
+    otherCitizenshipCountry?: string;
+    otherCitizenshipCertificate?: string;
+    otherCitizenshipDate?: string;
+    declarationConfirmed?: boolean;
   };
 
   errors: Record<string, string>;

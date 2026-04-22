@@ -9,17 +9,27 @@ import { FormState, FormStep } from '../types/form';
  * Determines the next step in the form flow based on current state.
  *
  * Journey routing:
- *  PASSPORT   — personal → born abroad? → national status → passport → next of kin
- *               → dependants → contact → lost passport? → [parents consent if 16-17]
- *               → evidence → check → payment → confirmation
- *  CITIZENSHIP — personal → address → residence history → contact → dependants
- *               → background → excluded classes → evidence → check → payment → confirmation
- *  RESIDENCY  — personal → passport → address → residence history → contact
- *               → dependants → background → excluded classes → evidence → check → payment → confirmation
- *  WORK_PERMIT — personal → passport → skill category → [professional agency?]
- *               → address → contact → dependants → evidence → check → payment → confirmation
- *  STUDY      — H1 reference → personal → address → contact → dependants
- *               → evidence → check → payment → confirmation
+ *  PASSPORT        — personal → born abroad? → national status → passport → next of kin
+ *                    → dependants → contact → lost passport? → [parents consent if 16-17]
+ *                    → evidence → check → payment → confirmation
+ *  CITIZENSHIP     — personal → address → residence history → contact → dependants
+ *                    → background → excluded classes → evidence → check → payment → confirmation
+ *  RESIDENCY       — personal → passport → address → residence history → contact
+ *                    → dependants → background → excluded classes → evidence → check → payment → confirmation
+ *  WORK_PERMIT     — personal → passport → skill category → [professional agency?]
+ *                    → address → contact → dependants → evidence → check → payment → confirmation
+ *  STUDY           — H1 reference → personal → address → contact → dependants
+ *                    → evidence → check → payment → confirmation
+ *  STAY_EXTENSION  — start page → personal → passport → extension details
+ *                    → evidence → check → payment → confirmation
+ *  SCHOOL_REPORT   — school details → student details → report type → [departure] → remarks
+ *                    → check → confirmation (no payment)
+ *  STUDENT_TRANSFER — start page → personal → passport → current institution → transfer institution
+ *                    → reasons → evidence → check → payment → confirmation
+ *  RE_ENTRY        — start page → personal → passport → enforcement history → reasons
+ *                    → sponsor → evidence → check → payment → confirmation
+ *  RENUNCIATION    — start page → personal → renunciation details → declaration
+ *                    → check → confirmation (no payment)
  */
 export const getNextStep = (state: FormState): FormStep => {
   const j = state.journeyType;
@@ -33,19 +43,20 @@ export const getNextStep = (state: FormState): FormStep => {
       return 'START_PAGE';
 
     case 'START_PAGE':
-      if (j === 'STAY_EXTENSION') return 'PERSONAL_DETAILS';
+      // These journeys skip eligibility and go straight to personal details
+      if (j === 'STAY_EXTENSION' || j === 'STUDENT_TRANSFER' || j === 'RE_ENTRY' || j === 'RENUNCIATION') {
+        return 'PERSONAL_DETAILS';
+      }
       return 'ELIGIBILITY';
 
     // ── Eligibility ────────────────────────────────────────────────
     case 'ELIGIBILITY':
       if (j === 'PASSPORT') {
-        // age===15 means under-16 child (Form B), age===17 young adult, age===18 adult
         if (state.age === 15 && state.isBarbadosCitizen === false) return 'EXIT_INELIGIBLE';
         if (state.isBarbadosCitizen === false) return 'EXIT_INELIGIBLE';
         return 'PERSONAL_DETAILS';
       }
-      if (j === 'STUDY')    return 'H1_REFERENCE';
-      // CITIZENSHIP, WORK_PERMIT, RESIDENCY all start with personal details
+      if (j === 'STUDY') return 'H1_REFERENCE';
       return 'PERSONAL_DETAILS';
 
     // ── Study: H1 Reference ────────────────────────────────────────
@@ -55,11 +66,11 @@ export const getNextStep = (state: FormState): FormStep => {
     // ── Personal Details ───────────────────────────────────────────
     case 'PERSONAL_DETAILS':
       if (j === 'PASSPORT') {
-        // If born abroad, collect born-abroad details before national status
         return state.bornAbroad ? 'BORN_ABROAD' : 'NATIONAL_STATUS';
       }
       if (j === 'STUDY') return 'ADDRESS_BLOCK';
-      // CITIZENSHIP, WORK_PERMIT, RESIDENCY → passport / travel doc next
+      if (j === 'RENUNCIATION') return 'RENUNCIATION_DETAILS';
+      // CITIZENSHIP, WORK_PERMIT, RESIDENCY, STAY_EXTENSION, STUDENT_TRANSFER, RE_ENTRY
       return 'PASSPORT_DETAILS';
 
     // ── Passport: Born Abroad ──────────────────────────────────────
@@ -75,12 +86,41 @@ export const getNextStep = (state: FormState): FormStep => {
       if (j === 'PASSPORT') return 'NEXT_OF_KIN';
       if (j === 'WORK_PERMIT') return 'SKILL_CATEGORY';
       if (j === 'STAY_EXTENSION') return 'STAY_EXTENSION_DETAILS';
-      // CITIZENSHIP, RESIDENCY → address block (no skill category)
+      if (j === 'STUDENT_TRANSFER') return 'H4_CURRENT_INSTITUTION';
+      if (j === 'RE_ENTRY') return 'REENTRY_ENFORCEMENT';
+      // CITIZENSHIP, RESIDENCY → address block
       return 'ADDRESS_BLOCK';
 
-    // ── Form B: Stay Extension Details ───────────────────────────
+    // ── Form B: Stay Extension Details ────────────────────────────
     case 'STAY_EXTENSION_DETAILS':
       return 'EVIDENCE_UPLOAD';
+
+    // ── Form H-4: Student Transfer ────────────────────────────────
+    case 'H4_CURRENT_INSTITUTION':
+      return 'H4_TRANSFER_INSTITUTION';
+
+    case 'H4_TRANSFER_INSTITUTION':
+      return 'H4_REASONS';
+
+    case 'H4_REASONS':
+      return 'EVIDENCE_UPLOAD';
+
+    // ── Re-Entry Application ──────────────────────────────────────
+    case 'REENTRY_ENFORCEMENT':
+      return 'REENTRY_REASONS';
+
+    case 'REENTRY_REASONS':
+      return 'REENTRY_SPONSOR';
+
+    case 'REENTRY_SPONSOR':
+      return 'EVIDENCE_UPLOAD';
+
+    // ── Renunciation of Citizenship ───────────────────────────────
+    case 'RENUNCIATION_DETAILS':
+      return 'RENUNCIATION_DECLARATION';
+
+    case 'RENUNCIATION_DECLARATION':
+      return 'CHECK_YOUR_ANSWERS';
 
     // ── Passport: Next of Kin ─────────────────────────────────────
     case 'NEXT_OF_KIN':
@@ -112,7 +152,6 @@ export const getNextStep = (state: FormState): FormStep => {
 
     // ── Passport: Lost / Stolen Passport ──────────────────────────
     case 'LOST_PASSPORT':
-      // 16–17 year-olds need parental consent
       if (state.age === 17) return 'PARENTS_CONSENT';
       return 'EVIDENCE_UPLOAD';
 
@@ -141,7 +180,6 @@ export const getNextStep = (state: FormState): FormStep => {
 
     case 'H3_REPORT_TYPE': {
       const type = state.h3Report?.reportType;
-      // If student has departed (C or D), collect departure details
       if (type === 'C' || type === 'D') return 'H3_DEPARTURE_DETAILS';
       return 'H3_REMARKS';
     }
@@ -157,8 +195,8 @@ export const getNextStep = (state: FormState): FormStep => {
       return 'CHECK_YOUR_ANSWERS';
 
     case 'CHECK_YOUR_ANSWERS':
-      // School Report doesn't require payment
-      if (j === 'SCHOOL_REPORT') return 'CONFIRMATION';
+      // No payment required for: School Report, Renunciation
+      if (j === 'SCHOOL_REPORT' || j === 'RENUNCIATION') return 'CONFIRMATION';
       return 'PAYMENT';
 
     case 'PAYMENT':
@@ -181,9 +219,9 @@ export const getPreviousStep = (state: FormState): FormStep => {
     case 'ELIGIBILITY':      return 'START_PAGE';
 
     // Form H-3
-    case 'H3_SCHOOL_DETAILS':   return 'GATEWAY';
-    case 'H3_STUDENT_DETAILS':  return 'H3_SCHOOL_DETAILS';
-    case 'H3_REPORT_TYPE':      return 'H3_STUDENT_DETAILS';
+    case 'H3_SCHOOL_DETAILS':    return 'GATEWAY';
+    case 'H3_STUDENT_DETAILS':   return 'H3_SCHOOL_DETAILS';
+    case 'H3_REPORT_TYPE':       return 'H3_STUDENT_DETAILS';
     case 'H3_DEPARTURE_DETAILS': return 'H3_REPORT_TYPE';
     case 'H3_REMARKS':
       return (state.h3Report?.reportType === 'C' || state.h3Report?.reportType === 'D')
@@ -193,10 +231,28 @@ export const getPreviousStep = (state: FormState): FormStep => {
     // Form B — Stay Extension
     case 'STAY_EXTENSION_DETAILS': return 'PASSPORT_DETAILS';
 
-    case 'H1_REFERENCE':     return 'ELIGIBILITY';
+    // Form H-4 — Student Transfer
+    case 'H4_CURRENT_INSTITUTION':   return 'PASSPORT_DETAILS';
+    case 'H4_TRANSFER_INSTITUTION':  return 'H4_CURRENT_INSTITUTION';
+    case 'H4_REASONS':               return 'H4_TRANSFER_INSTITUTION';
+
+    // Re-Entry Application
+    case 'REENTRY_ENFORCEMENT': return 'PASSPORT_DETAILS';
+    case 'REENTRY_REASONS':     return 'REENTRY_ENFORCEMENT';
+    case 'REENTRY_SPONSOR':     return 'REENTRY_REASONS';
+
+    // Renunciation of Citizenship
+    case 'RENUNCIATION_DETAILS':     return 'PERSONAL_DETAILS';
+    case 'RENUNCIATION_DECLARATION': return 'RENUNCIATION_DETAILS';
+
+    case 'H1_REFERENCE':      return 'ELIGIBILITY';
 
     case 'PERSONAL_DETAILS':
       if (j === 'STUDY') return 'H1_REFERENCE';
+      // Journeys that skip ELIGIBILITY go back to START_PAGE
+      if (j === 'STAY_EXTENSION' || j === 'STUDENT_TRANSFER' || j === 'RE_ENTRY' || j === 'RENUNCIATION') {
+        return 'START_PAGE';
+      }
       return 'ELIGIBILITY';
 
     case 'BORN_ABROAD':      return 'PERSONAL_DETAILS';
@@ -210,6 +266,7 @@ export const getPreviousStep = (state: FormState): FormStep => {
 
     case 'CHECK_YOUR_ANSWERS':
       if (j === 'SCHOOL_REPORT') return 'H3_REMARKS';
+      if (j === 'RENUNCIATION') return 'RENUNCIATION_DECLARATION';
       return 'EVIDENCE_UPLOAD';
 
     case 'NEXT_OF_KIN':      return 'PASSPORT_DETAILS';
@@ -253,9 +310,12 @@ export const getPreviousStep = (state: FormState): FormStep => {
         return state.age === 17 ? 'PARENTS_CONSENT' : 'LOST_PASSPORT';
       }
       if (j === 'CITIZENSHIP' || j === 'RESIDENCY') return 'EXCLUDED_CLASSES';
+      if (j === 'STAY_EXTENSION') return 'STAY_EXTENSION_DETAILS';
+      if (j === 'STUDENT_TRANSFER') return 'H4_REASONS';
+      if (j === 'RE_ENTRY') return 'REENTRY_SPONSOR';
       return 'DEPENDANT_DETAILS';
 
-    case 'PAYMENT':           return 'CHECK_YOUR_ANSWERS';
+    case 'PAYMENT': return 'CHECK_YOUR_ANSWERS';
 
     default: return 'GATEWAY';
   }

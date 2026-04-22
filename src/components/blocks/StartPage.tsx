@@ -91,6 +91,53 @@ export const StartPage: React.FC = () => {
         'Details of the circumstances being reported'
       ],
       time: '15 to 20 minutes'
+    },
+    STUDENT_TRANSFER: {
+      title: 'Transfer to a Different Educational Institution',
+      desc: 'For non-immigrant students who wish to transfer from their current approved institution to another (Form H-4).',
+      needs: [
+        'Your student visa number and expiry date',
+        'Details of your current institution',
+        'Details of the institution you wish to transfer to',
+        'Course information at the new institution',
+        'Your passport bio-data page',
+        'Credit or debit card for the fee ($100 BBD)'
+      ],
+      time: '20 to 30 minutes'
+    },
+    RE_ENTRY: {
+      title: 'Apply for Re-Entry to Barbados',
+      desc: 'If you have previously been removed or deported from Barbados, use this service to apply to be permitted to return.',
+      needs: [
+        'Your passport',
+        'Details of your previous removal or deportation',
+        'Details of a sponsor in Barbados',
+        'Reasons for requesting re-entry',
+        'Credit or debit card for the fee ($100 BBD)'
+      ],
+      time: '25 to 35 minutes'
+    },
+    RENUNCIATION: {
+      title: 'Renounce Your Barbadian Citizenship',
+      desc: 'Formally renounce your Barbadian citizenship. You must hold, or be in the process of acquiring, citizenship of another country.',
+      needs: [
+        'Your Barbadian passport or national identification',
+        'Proof of other citizenship (passport or citizenship certificate)',
+        'A Justice of the Peace to witness your declaration in person'
+      ],
+      time: '15 to 20 minutes'
+    },
+    NATURALISATION: {
+      title: 'Apply for Naturalisation (Form N.1)',
+      desc: 'Apply to become a Barbadian citizen by naturalisation after qualifying residence.',
+      needs: [],
+      time: '45+ minutes'
+    },
+    MEDICAL_FORM: {
+      title: 'Medical Examination Report',
+      desc: 'Required as part of other immigration applications.',
+      needs: [],
+      time: '15 to 20 minutes'
     }
   };
 
